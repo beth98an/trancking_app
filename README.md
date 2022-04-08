@@ -11,3 +11,5 @@
 * SQL/NOSQL (MONDODB/POSTGRES)
 * Dependencies: express, nodemon, jest, pg, supertest
 
+## Future Features
+- Notifications/reminders to users
