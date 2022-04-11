@@ -2,21 +2,21 @@ const Habit = require('../models/Habit');
 
 async function index(req, res) {
     try {
-        const uhabit = await Habit.all;
-        res.status(200).json(uhabit)
+        const habit = await Habit.all;
+        res.status(200).json(habit)
     } catch (err) {
         res.status(500).json({err})
     }
 }
 
-// async function show(req, res) {
-//     try {
-//         const habit = await Habit.findById(req.params.id);
-//         res.status(200).json(habit)
-//     } catch (err) {
-//         res.status(404).json({err})
-//     }
-// }
+async function show(req, res) {
+    try {
+        const habit = await Habit.show(req.params.id);
+        res.status(200).json(habit)
+    } catch (err) {
+        res.status(404).json({err})
+    }
+}
 
 async function create(req, res) {
     try {
@@ -27,16 +27,16 @@ async function create(req, res) {
     }
 }
 
-// async function destroy(req, res) {
-//     try {
-//         const habit = await Habit.findById(req.params.id);
-//         const res = await habit.destroy();
-//         res.status(204).end();
-//     } catch (err) {
-//         res.status(404).json({err});
-//     };
-// }
+async function destroy(req, res) {
+    try {
+        const habit = await Habit.show(req.params.id);
+        await habit.destroy();
+        res.status(204).end();
+    } catch (err) {
+        res.status(404).json({err});
+    };
+}
 
-module.exports = { index, create }
+module.exports = { index, show, create, destroy }
 
 
