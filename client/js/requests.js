@@ -1,4 +1,4 @@
-// function to retrieve all the posts
+// function to retrieve all
 async function getAllHabits() {
     try {
         const resp = await fetch(`http://localhost:3000/habits`);
@@ -9,7 +9,7 @@ async function getAllHabits() {
     }
 };
 
-// function to retrieve a single post by its ID
+// function to retrieve a single habit post by its ID
 async function getHabit(id) {
     try {
         const resp = await fetch(`http://localhost:3000/habits/${id}`);
@@ -20,7 +20,7 @@ async function getHabit(id) {
     }
 };
 
-// function that sends the post to the server and then redirects to the posts route.
+// function that sends the post to the server and then redirects to the route.
 async function newHabit(e) {
     e.preventDefault();
     try {
