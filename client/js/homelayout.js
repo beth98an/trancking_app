@@ -1,7 +1,10 @@
-/* THIS IS A COPY FROM ANOTHER REPO FOR IDEAS */
+/* const {getAllHabits, getHabit, addNewHabit} = require('./requests'); */
 
+//is this where we do window hash endpoint per userID
+let user_id
+//HOW TO SEND USERID - its a hash??
 
-
+//modal open and close
 
 const newHabitButton = document.getElementById('newHabitButton')
 newHabitButton.addEventListener('click', openModal)
@@ -18,82 +21,113 @@ function closeModal() {
     newHabitModal.display = 'none';
 }
 
-//this should close modal if you click outside of it but currently
-/* window.onclick = function(event) {
-    if (event.target != newHabitModal) {
-        if (newHabitModal.style.display === "block") {
-            newHabitModal.style.display = "none";
+
+
+//submit form in modal
+
+/* data we want to send = habitData.user_id, habitData.name, habitData.desription, habitData.frequency, habitData.color */
+ 
+
+const addHabitForm = getElementById('addHabitForm');
+addHabitForm.addEventListener('submit', addNewHabit);
+
+//async POST? e.preventDefault? HOW TO SEND USERID??
+function addNewHabit() {
+    const formData = new FormData(addHabitForm)
+    const formDataSerialised = Object.fromEntries(formData)
+
+    const current = new Date().toLocaleString();
+
+    const jsonObject = {...formDataSerialised, user_id: user_id, dateTime: current}
+
+    //console.log(jsonObject) - use for testing endpoints
+    
+    try{
+        const response = await fetch ("http://localhost:3000/", {
+        method: 'POST', 
+        body: JSON.stringify(jsonObject),
+        headers: {
+            'Content-Type': 'application/json'
         }
-        
-    }
-  }
- */
-
-
-
-
-
-
-const {getAllPosts, getPost, post} = require('./requests');
-
-window.addEventListener('hashchange', update);
-window.addEventListener('load', update);
-
-
-const inputForm = document.getElementById('input-form')
-inputForm.addEventListener('submit', post);
-
-const form = document.getElementById('form');
-const postContent = document.querySelector('#post');
-
-async function update() {
-    let id = window.location.hash.substring(1);
-    if (id) {
-        let data = await getPost(id);
-        form.classList.add("hidden");
-        postContent.classList.remove("hidden")
-        if (typeof data !== 'undefined') {
-            document.querySelector("#post-title").textContent = data.habitTitle;
-            document.querySelector("#post-name").textContent = data.author;
-            document.querySelector("#post-body").textContent = data.body;
-        } else {
-            document.querySelector("#post-title").textContent = 'Post does not exist'
-        }
-    } else {
-        document.querySelector("#post-title").textContent = "";
-        document.querySelector("#post-name").textContent = "";
-        document.querySelector("#post-body").textContent = "";
-        form.classList.remove("hidden");
-        postContent.classList.add("hidden");
-        fadeClassChecker(document.querySelector('#title'))
-        fadeClassChecker(document.querySelector('#author'))
-        fadeClassChecker(document.querySelector('#body'))
+        })
+        const json = await response.json();
+        console.log(json)
+    }catch(e){
+        console.error(e);
+        alert('There was an error')
     }
 }
 
-function fadeClassChecker(input) {
-    let label = document.querySelector(`.label-${input.id}`);
-    if(!input.value){
-        label.classList.remove('fade');
-        label.classList.add('fade-hidden');
+
+
+
+//load container below
+
+// fetching all posts for this user
+fetch(`http://localhost:${port}/#${user_id}`)
+.then(resp => resp.json())
+.then(resp => {
+    //console.log(resp) - use this to test resp and endpoints
+    resp.forEach(habit => {
+        showCurrentlyTracking(habit)
+    });
+    
+})
+
+//should this be async?
+function showCurrentlyTracking(habit) {
+
+}
+
+
+
+
+
+
+//NOTES
+const navLinks = document.querySelectorAll('a.navlink');
+const main = document.querySelector('main');
+
+window.addEventListener('hashchange', updateContent);
+
+function updateNav(hash) {
+    const updateLink = link => {
+        link.classList = (link.textContent == '+' && hash.includes('new') || hash.includes(link.textContent)) ? ['navlink', 'current'] : ['navlink']
+    };
+    navLinks.forEach(updateLink)
+}
+
+function updateMain(hash) {
+    main.innerHTML = '';
+    if (hash) {
+        let [category, id] = hash.split('/');
+        id ? loadModalFor(category, id) : loadIndexFor(category)
     } else {
-        label.classList.remove('fade-hidden');
-        label.classList.add('fade');
+        const header = document.createElement('h1');
+        header.className = 'title';
+        header.textContent = "Welcome to the Reading Room";
+        main.appendChild(header);
     }
 }
 
-document.querySelector('.back-btn').addEventListener('click', () => {
-    window.location.hash = ''
-});
+async function loadIndexFor(category){
+    modal.style.display = 'none';
+    const data = await getAll(category);
+    data.forEach(a => renderCard(a, category));
+}
 
-document.querySelector("#title").addEventListener('input', updateLabels)
-document.querySelector("#author").addEventListener('input', updateLabels)
+function renderCard(data, category){
+    let link = document.createElement('a');
+    let card = document.createElement('div');
+    card.className = 'card';
+    link.href = `#${category}/${data.id}` 
+    card.textContent = data.name || data.title;
+    link.appendChild(card);
+    main.appendChild(link);
+}
 
-document.querySelector("#body").addEventListener('input', updateLabels)
-
-function updateLabels(e) {
-    fadeClassChecker(e.target)
-};
-
-
-
+function updateContent(){
+    let hash = window.location.hash.substring(1);
+    updateNav(hash);
+    updateMain(hash);
+}

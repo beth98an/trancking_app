@@ -20,14 +20,14 @@
         </section>
 
         <div id="newHabitModal">
-            <form id="addHabit" action="" class="padding">
+            <form id="addHabitForm" action="" class="padding">
                 <h3 id="form-title">Track a new habit!</h3>
                 <div class="padding-top">
-                    <label for="habitName">Habit:</label>
-                    <input name="habitName" type="text" id="habitName" class="form-control" placeholder="What habit would you like to track...">
+                    <label for="name">Habit:</label>
+                    <input name="name" type="text" id="habitName" class="form-control" placeholder="What habit would you like to track...">
                     
-                    <label for="habitDesc" >Description:</label>
-                    <input name="habitDesc" type="text" id="habitDesc" class="form-control" placeholder="Small description of your habit...">
+                    <label for="description" >Description:</label>
+                    <input name="description" type="text" id="habitDesc" class="form-control" placeholder="Small description of your habit...">
 
                     <label for="frequency" >Frequency:</label>
                     <input name="frequency" type="text" id="frequency" class="form-control" placeholder="How frequently would you like to track your habit...">
@@ -46,11 +46,13 @@
 
     <main>
         <h2>Currently Tracking</h2>
-        <section id="trackingmodal" style="display: none;">
+        
+        <section id="trackingmodal" class="container">
             <i><a href="#">x</a></i>
             <h2></h2>
             <article></article>
         </section>
+   
     </main>
 
 
