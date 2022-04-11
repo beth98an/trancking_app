@@ -13,7 +13,7 @@ body{
 
 /* media query - mobile first */
 #newHabitModal{
-    display: block;
+    display: none;
     /* width: 80vw;
     padding: 50px; */
     border: 5px solid yellow;
