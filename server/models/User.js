@@ -53,7 +53,6 @@ class User {
                 resolve(`User ${result.user_id} was successfully deleted.`)
             } catch (err) {
                 reject('User could not be deleted.')
-
             }
         })
     }

@@ -40,7 +40,6 @@ class Habit {
         return new Promise (async (resolve, reject) => {
                 try {
                     let habitData = await db.query(`SELECT * FROM habits WHERE habit_id = $1;`, [habit_id])
-
                     let habit = new Habit (habitData.rows[0])
                     resolve(habit)
                 } catch (err) {
