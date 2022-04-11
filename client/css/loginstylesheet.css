@@ -1,15 +1,78 @@
-/* import other style sheets
-import google  fonts*/
-
-body{
+* {
+    margin: 0;
+    padding: 0;
+    font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
+  }
+  
+  body {
+    padding: 50px;
     background-color: black;
-    color: antiquewhite;
+  }
+  .header{
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 5x0px;
+  margin-top: 60px;
+  padding: 10px;
+  font-size: 50px;
+color: white;
 }
 
-header{
+fieldset {
+    width: 40%;
+    margin: auto;
+    padding: 10px;
+    border: solid white 5px;
+    border-radius: 10px;
+    min-width: 200px;
+    background-color: #f94144;
+    color: white;
+    
+  }
+  
+  legend {
+    
+    padding: 10px;
+    font-size: 30px;
+    color: white;
+  }
 
-}
+  label {
+    display: block;
+    font-size: 25px;
+  }
+  input {
+    padding: 3px;
+    color: black;
+    border: 2px solid black;
+    border-radius: 5px;
+    box-sizing: border-box;
+    background-color:;
+  }
+  
 
-section{
+  input[type="text"] {
+    width: 100%;
+    padding: 10px;
+  }
 
-}
+  .login-btn {
+    margin-top: 20px;
+    margin-bottom: 10px;
+    padding: 10px 80px;
+    color: black;
+    position: relative;
+    left: 28%;
+    font-size: 30px;
+
+  }
+
+
+  .myForm {
+  padding: 50px;
+  background-color: black;
+  }
+
+  
+ 
