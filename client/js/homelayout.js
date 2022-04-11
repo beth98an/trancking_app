@@ -2,37 +2,32 @@
 
 
 
-<!-- Trigger/Open the Modal -->
-<button onclick="document.getElementById('id01').style.display='block'"
-class="w3-button">Open Modal</button>
-
-<!-- The Modal -->
-<div id="id01" class="w3-modal">
-  <div class="w3-modal-content">
-    <div class="w3-container">
-      <span onclick="document.getElementById('id01').style.display='none'"
-      class="w3-button w3-display-topright">&times;</span>
-      <p>Some text in the Modal..</p>
-      <p>Some text in the Modal..</p>
-    </div>
-  </div>
-</div>
 
 const newHabitButton = document.getElementById('newHabitButton')
 newHabitButton.addEventListener('click', openModal)
 const newHabitModal = document.getElementById('newHabitModal')
-//needs a close modal button/click outside of the event listener
+
+const closeBtn = document.getElementById('closeBtn')
+closeBtn.addEventListener('click', closeModal);
 
 function openModal() {
     newHabitModal.style.display = 'block';
-
-
-
 }
 
+function closeModal() {
+    newHabitModal.display = 'none';
+}
 
-
-
+//this should close modal if you click outside of it but currently
+/* window.onclick = function(event) {
+    if (event.target != newHabitModal) {
+        if (newHabitModal.style.display === "block") {
+            newHabitModal.style.display = "none";
+        }
+        
+    }
+  }
+ */
 
 
 
