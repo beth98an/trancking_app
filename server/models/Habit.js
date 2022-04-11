@@ -27,7 +27,7 @@ class Habit {
     static async create(habitData) {
         return new Promise (async (resolve, reject) => {
             try {
-                    let habits = await db.query(`INSERT INTO habits (user_id, name, question, frequency, color, creation_date) VALUES ($1, $2, $3, $4, $5, $6) RETURNING *;`, [habitData.user_id, habitData.name, habitData.question, habitData.frequency, habitData.color, habitData.creation_date])
+                    let habits = await db.query(`INSERT INTO habits (user_id, name, question, frequency, color) VALUES ($1, $2, $3, $4, $5) RETURNING *;`, [habitData.user_id, habitData.name, habitData.question, habitData.frequency, habitData.color])
                     let habit = new Habit(habits.rows[0])
                     resolve(habit)
             } catch (err) {
