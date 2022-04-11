@@ -1,13 +1,16 @@
-/* const {getAllHabits, getHabit, addNewHabit} = require('./requests'); */
+//need prevent default/empty form data submit etc
+
+const { Http2ServerRequest } = require('http2');
+const {getAllHabits, getHabit, addNewHabit} = require('./requests');
 
 //is this where we do window hash endpoint per userID
-let user_id
-//HOW TO SEND USERID - its a hash??
+//let user_id = window.location.hash.substring(1);
+//HOW TO Define USERID and redirect to there
 
 //modal open and close
-
 const newHabitButton = document.getElementById('newHabitButton')
 newHabitButton.addEventListener('click', openModal)
+
 const newHabitModal = document.getElementById('newHabitModal')
 
 const closeBtn = document.getElementById('closeBtn')
@@ -26,7 +29,8 @@ function closeModal() {
 //submit form in modal
 
 /* data we want to send = habitData.user_id, habitData.name, habitData.desription, habitData.frequency, habitData.color */
- 
+
+//amount of tracking - stretch
 
 const addHabitForm = getElementById('addHabitForm');
 addHabitForm.addEventListener('submit', addNewHabit);
@@ -40,10 +44,8 @@ function addNewHabit() {
 
     const jsonObject = {...formDataSerialised, user_id: user_id, dateTime: current}
 
-    //console.log(jsonObject) - use for testing endpoints
-    
     try{
-        const response = await fetch ("http://localhost:3000/", {
+        const response = await fetch (`http://localhost:${port}/${user_id}/`, {
         method: 'POST', 
         body: JSON.stringify(jsonObject),
         headers: {
@@ -63,8 +65,14 @@ function addNewHabit() {
 
 //load container below
 
+/* ???
+async function loadHabit(user_id){
+    const data = await getAllHabits(user_id);
+    data.forEach(habit => renderCard(habit));
+} */
+
 // fetching all posts for this user
-fetch(`http://localhost:${port}/#${user_id}`)
+fetch(`http://localhost:${port}/${user_id}/`)
 .then(resp => resp.json())
 .then(resp => {
     //console.log(resp) - use this to test resp and endpoints
@@ -76,26 +84,70 @@ fetch(`http://localhost:${port}/#${user_id}`)
 
 //should this be async?
 function showCurrentlyTracking(habit) {
+    const ahabit = document.createElement('div')
+    ahabit.setAttribute('class', 'habitContainer');
+    
+    const habitName = document.createElement('h3')
+    habitName.textContent = habit.name
+    const habitDesc = document.createElement('p')
+    habitName.textContent = habit.description
+    const habitFrequency = document.createElement('p')
+    habitFrequency.textContent = habit.frequency
+    
+    const updateButton = document.createElement('input')
+    //see pseudocode - 
+    updateButton.setAttribute('type', 'submit')
+    updateButton.setAttribute('value', 'done') //or update
+    updateButton.addEventListener('submit', habitUpdate) //change func depending on type?
 
+    ahabit.appendChild(habitName)
+    ahabit.appendChild(habitDesc)
+    ahabit.appendChild(habitFrequency)
+
+    /* if frequency = yes/no
+    load a tick box that submits a date to backend
+    updateButton.setAttribute('class', 'updateYesNo')
+    should we add limit to number of times this can be pressed?
+    
+    else
+    load some level of quantity to send to backend
+    const formQuantity = document.createElement('form')
+    const enterQuantity = document.createElement('input')
+    enterQuantity.setAttribute('class', 'updateQuantity')
+    enterQuantity.setAttribute('name', 'frequency')
+    enterQuantity.setAttribute('type', 'text')
+    formQuanity.appendChild(enterQuantity)
+    formQuanity.appendChild(updateButton)
+
+    */
+
+    //open modal to a graph - if statement for custom day/every mon/tues/sat etc know if ahead or behind goals?
+    
+    
 }
 
+
+//check box - did you do this today? sends form data of current time to backend
+//add event listener
+
+
+function habitUpdate(user_id, habit, frequency){
+    //definee frequency
+    /* if class = yes/no or quantity empty - get current time 
+    else quantity */
+    fetch(`http://localhost:${port}/${user_id}/`, {
+      method: 'PUT',
+      body: JSON.stringify({ habit: habit, frequency: frequency }),
+      headers: { 'Content-Type': 'application/json' },
+    })
+    location.reload();
+};
 
 
 
 
 
 //NOTES
-const navLinks = document.querySelectorAll('a.navlink');
-const main = document.querySelector('main');
-
-window.addEventListener('hashchange', updateContent);
-
-function updateNav(hash) {
-    const updateLink = link => {
-        link.classList = (link.textContent == '+' && hash.includes('new') || hash.includes(link.textContent)) ? ['navlink', 'current'] : ['navlink']
-    };
-    navLinks.forEach(updateLink)
-}
 
 function updateMain(hash) {
     main.innerHTML = '';
@@ -110,24 +162,3 @@ function updateMain(hash) {
     }
 }
 
-async function loadIndexFor(category){
-    modal.style.display = 'none';
-    const data = await getAll(category);
-    data.forEach(a => renderCard(a, category));
-}
-
-function renderCard(data, category){
-    let link = document.createElement('a');
-    let card = document.createElement('div');
-    card.className = 'card';
-    link.href = `#${category}/${data.id}` 
-    card.textContent = data.name || data.title;
-    link.appendChild(card);
-    main.appendChild(link);
-}
-
-function updateContent(){
-    let hash = window.location.hash.substring(1);
-    updateNav(hash);
-    updateMain(hash);
-}
