@@ -36,7 +36,34 @@ class Habit {
         })
     }
 
+    static async show(user_id) {
+        return new Promise (async (resolve, reject) => {
+                try {
+                    let habitData = await db.query(`SELECT * FROM habits WHERE user_id = $1;`, [user_id])
+                    let habit = new Habit (habitData.rows[0])
+                    resolve(habit)
+                } catch (err) {
+                    reject('Habit not found!')
+                }
+            }  
+        )
+    }
+
+    static async destroy(habit_id) {
+        return new Promise (async (resolve, reject) => {
+            try {
+                await db.query(`DELETE * FROM habits WHERE habit_id = $1;`, [habit_id])
+                resolve(`Habit ${habit_id} was successfully deleted!`)
+            } catch (err) {
+                reject('Habit could not be deleted.')
+            }
+        })
+    }
+
+
+
 
 }    
 
 module.exports = Habit
+ 
