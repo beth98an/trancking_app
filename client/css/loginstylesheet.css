@@ -12,8 +12,8 @@
   width: 100%;
   display: flex;
   justify-content: center;
-  margin-bottom: 5x0px;
-  margin-top: 60px;
+  margin-bottom: 30px;
+  margin-top: 30px;
   padding: 10px;
   font-size: 50px;
 color: white;
@@ -75,4 +75,47 @@ fieldset {
   }
 
   
- 
+  nav {
+       color: #ffff;
+       font-size: 60px;
+       font-weight: bold;
+       border-bottom: 1px solid #38444d;
+       text-align: center;
+     }
+
+.change-modal .modal-content{
+padding: 20px;
+
+
+ }
+
+ .radio-class{
+   display: flex;
+   justify-content: space-around;
+   flex-wrap: wrap;
+
+  padding: 10px;
+  border: 2px solid black;
+  border-radius: 5px;
+ }
+
+ .btn-danger{
+font-size: 30px;
+}
+.btn-primary {
+  font-size: 30px;
+  }
+
+  
+.btntoadd{
+
+  font-size: 50px;
+}
+
+.btn-register{
+width: 200px;
+height: 70px;
+background-color: white;
+color: black;
+
+}

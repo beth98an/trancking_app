@@ -17,74 +17,76 @@
       crossorigin="anonymous"
     />
     <link rel="stylesheet" href="css/loginstylesheet.css" />
-    <title>Welcome to our app</title>
+    <title>Document</title>
   </head>
 
   <body>
-    <section class="header">
-      <h1>Welcome to Our App</h1>
-    </section>
+    <nav><span>Tracking Habits App</span></nav>
 
-    <section class="myForm">
-      <form action="">
-        <fieldset>
-          <legend><h1>Login:</h1></legend>
-          <label for="name">Name:</label>
-          <input type="text" id="name" />
-          <label for="password">Password:</label>
-          <input type="text" name="" id="password" />
-          <div class="btntoadd">
-            <button
-              type="button"
-              class="btn btn-success btn-register btn-lg mt-2 ml-2"
-              data-toggle="modal"
-              data-target="#meuModal"
-            >
-              Register
-            </button>
-          <!-- <input
-            type="submit"
-            name="Send"
-            value="Login"
-            id=""
-            class="login-btn"
-          /> -->
-        </fieldset>
-      </form>
-    </section>
-
-    <!-- Modal Register -->
+    <div class="btntoadd">
+      <button
+        type="button"
+        class="btn btn-success btn-lg mt-2 ml-2"
+        data-toggle="modal"
+        data-target="#meuModal"
+      >
+        &#43;
+      </button>
+    </div>
 
     <!-- Modal -->
     <div id="meuModal" class="modal change-modal fade" role="dialog">
       <div class="modal-dialog">
         <div class="modal-content">
-          <h1 class="modal_title">Register:</h1>
-
+          <h1 class="modal_title">Track a new habit:</h1>
+         
           <!-- Modal Body -->
           <div class="modal-body">
-        <!-- Modal Content -->
-            <label for="reg_name">Name:</label>
-            <input type="text" id="reg_name" />
-            <label for="reg_email">Email:</label>
-            <input type="email" id="reg_email" />
-            <label for="reg_password">Password:</label>
-            <input type="password" id="reg_password" />
+            <!-- Modal Content -->
+  
+            <label for="hab_name">Name your habit:</label>
+            <input type="text" id="hab_name" />
+            <label for="hab_desc">Describe your habit:</label>
+            <input type="text" id="hab_desc" />
 
+            <!-- ================== radio section ========================= -->
+            <label for="frequenc">Frequency:</label>
+            <div class="radio-class">
+            <input type="radio" name="monday" id="monday" />
+            <label for="monday">monday</label>
+            <input type="radio" name="tuesday" id="tuesday" />
+            <label for="tuesday">tuesday</label>
+            <input type="radio" name="wednesday" id="wednesday" />
+            <label for="wednesday">wednesday</label>
+            <label for="thursday">thursday</label>
+            <input type="radio" name="thursday" id="thursday" />
+            <label for="weekly">friday</label>
+            <input type="radio" name="fiday" id="thursday" />
+            <label for="saturday">saturday</label>
+            <input type="radio" name="saturday" id="saturday" />
+            <label for="sunda">sunday</label>
+            <input type="radio" name="sunday" id="sunday" />
+
+          </div>
           </div>
 
           <!-- Modal Footer-->
           <div class="modal-footer">
-            <!-- <button type="button" class="btn btn-danger" data-dismiss="modal">
-              Close
-            </button> -->
+
+           
+            </div>
             <button type="button" class="btn btn-primary">
-              Re
+              Add this habit
             </button>
+              <button type="button" class="btn btn-danger" data-dismiss="modal">
+                Close
+              </button>
           </div>
         </div>
       </div>
     </div>
+
+  
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
