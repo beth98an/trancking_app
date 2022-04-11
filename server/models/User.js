@@ -1,4 +1,5 @@
 const db = require('../dbLink');
+// const { propfind } = require('../routes/users');
 
 class User {
     constructor(data){
@@ -35,6 +36,28 @@ class User {
         })
     }
 
+    static async show(user_id) {
+        return new promise (async (resolve, reject)=> {
+            try {
+                let userData = await db.query(`SELECT users.*, habits.name FROM users INNER JOIN habits ON users.user_id = habits.user_id;`)
+                let user = userData.rows[0]
+                resolve(user)
+            } catch (err) {
+                resolve('User not found!')
+            }
+        })
+    }
+
+    static async destroy(user_id) {
+        return new Promise (async (resolve, reject) => {
+            try {
+                const result = await db.query(`DELETE * FROM users WHERE user_id = $1 RETURNING user_id;`)
+                resolve(`User ${user_id} was successfully deleted.`)
+            } catch (err) {
+                resolve('User could not be deleted.')
+            }
+        })
+    }
    
 }    
 
