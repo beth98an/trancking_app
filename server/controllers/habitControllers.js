@@ -2,8 +2,8 @@ const Habit = require('../models/Habit')
 
 async function index(req, res) {
     try {
-        const uhabit = await Habit.all
-        res.status(200).json(uhabit)
+        const habit = await Habit.all;
+        res.status(200).json(habit)
     } catch (err) {
         res.status(500).json({err})
     }
@@ -11,7 +11,7 @@ async function index(req, res) {
 
 async function show(req, res) {
     try {
-        const habit = await Habit.show(req.params.id)
+        const habit = await Habit.show(req.params.id);
         res.status(200).json(habit)
     } catch (err) {
         res.status(404).json({err})
@@ -29,15 +29,15 @@ async function create(req, res) {
 
 async function destroy(req, res) {
     try {
-        const habit = await Habit.show(req.params.id)
-        console.log(habit)
-        const res = await habit.destroy()
-        res.status(204).end()
+        const habit = await Habit.show(req.params.id);
+        await habit.destroy();
+        res.status(204).end();
     } catch (err) {
-        res.status(404).json({err})
-    }
+        res.status(404).json({err});
+    };
 }
 
-module.exports = { index, create, show, destroy}
+module.exports = { index, show, create, destroy }
+
 
 

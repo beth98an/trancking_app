@@ -11,7 +11,7 @@ async function index(req, res) {
 
 async function show(req, res) {
     try {
-        const user = await User.show(req.params.user_id);
+        const user = await User.show(req.params.id);
         res.status(200).json(user)
     } catch (err) {
         res.status(404).json({err})
@@ -29,14 +29,12 @@ async function create(req, res) {
 
 async function destroy(req, res) {
     try {
-        const user = await User.show(req.params.id)
-        const res = await user.destroy()
-        res.status(204).end()
+        const user = await User.show(req.params.id);
+        await user.destroy();
+        res.status(204).end();
     } catch (err) {
-        res.status(404).json({err})
-    }
+        res.status(404).json({err});
+    };
 }
 
-module.exports = { index, create, show, destroy }
-
-
+module.exports = { index, show, create, destroy }
