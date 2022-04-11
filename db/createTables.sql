@@ -18,7 +18,7 @@ CREATE TABLE habits (
     question VARCHAR(100),
     frequency VARCHAR(20),
     color VARCHAR (20),
-    creation_date DATE
+    creation_date DATE DEFAULT CURRENT_DATE
 );
 
 DROP TABLE IF EXISTS completed_habits;
@@ -27,5 +27,5 @@ CREATE TABLE completed_habits (
     id SERIAL PRIMARY KEY,
     habit_id INT,
     user_id INT,
-    dateCompleted DATE
+    dateCompleted DATE DEFAULT CURRENT_DATE
 );
