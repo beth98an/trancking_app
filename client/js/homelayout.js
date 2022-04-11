@@ -18,10 +18,17 @@ class="w3-button">Open Modal</button>
   </div>
 </div>
 
+const newHabitButton = document.getElementById('newHabitButton')
+newHabitButton.addEventListener('click', openModal)
+const newHabitModal = document.getElementById('newHabitModal')
+//needs a close modal button/click outside of the event listener
+
+function openModal() {
+    newHabitModal.style.display = 'block';
 
 
 
-
+}
 
 
 
