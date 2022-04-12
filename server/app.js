@@ -14,3 +14,5 @@ server.use('/habits', habitRoutes)
 server.get('/', (req, res) => res.send('Welcome to the habit tracker'))
 
 module.exports = server
+
+
