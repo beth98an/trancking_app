@@ -14,3 +14,92 @@
     formQuanity.appendChild(updateButton)
 
     */
+
+
+    Skip to content
+Search or jump to…
+Pull requests
+Issues
+Marketplace
+Explore
+ 
+@evelyn516 
+Nowshad10
+/
+auth-practise
+Private
+Code
+
+
+
+
+
+   
+const express = require('express');
+const cors = require('cors');
+const app = express();
+app.use(cors());
+app.use(express.json());
+const bcrypt = require('bcryptjs');
+
+const port = process.env.PORT || 3000
+
+const Users = require('./models/Users')
+
+app.get('/', (req, res) => {
+    res.send('Hello World!')
+});
+
+app.get('/users', async (req, res) => {
+    try{
+        const users = await Users.all
+        res.json({users})
+    } catch (err) {
+        res.status(500).json(err)
+    }
+});
+
+app.post('/register', async (req, res) => {
+    try {
+        const salt = await bcrypt.genSalt();
+        const hashed = await bcrypt.hash(req.body.passkey, salt)
+        await Users.create({...req.body, passkey: hashed})
+        res.status(201).json({msg: 'User created!'})
+    } catch (error) {
+        res.status(500).json({err: 'User cannot be created'})
+    }
+})
+
+app.post('/login', async (req, res) => {
+    try {
+       let user = await Users.findByUsername(req.body.username) 
+       if (!user) {
+           throw new Error('No user with this username')
+       }
+       const passwordCheck = bcrypt.compare(req.body.passkey, user.passkey)
+       if (passwordCheck) {
+           res.status(200).json({ user: user.username})
+       } else {
+           throw new Error('User could not be authenticated')
+       }
+    } catch (err) {
+        res.status(401).json({ err: 'Naughty naughty!' })
+    }
+})
+
+app.listen(port, () => {
+    console.log(`Express departing from port ${port}.`)
+});
+© 2022 GitHub, Inc.
+Terms
+Privacy
+Security
+Status
+Docs
+Contact GitHub
+Pricing
+API
+Training
+Blog
+About
+Loading complete
