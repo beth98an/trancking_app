@@ -4,7 +4,7 @@ VALUES
 ('Beth', 'bethlovesducks', 'beth@gmail.com', 'Beth Evans');
 
 
-INSERT INTO habits (user_id, name, question, frequency, color, creation_date) 
+INSERT INTO habits (user_id, name, description, frequency, day_month, color, creation_date) 
 VALUES 
-(1, 'Exercise', 'Have you exercised today?', 'Once per day', 'red', '2022-04-08'),
-(2, 'Run', 'Have you run today?', 'Once per day', 'yellow');
+(1, 'Exercise', 'Have you exercised today?', 2, 'day', 'red', '2022-04-08'),
+(2, 'Run', 'Have you run today?', 2, 'day', 'yellow');
