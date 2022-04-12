@@ -72,10 +72,10 @@ async function loadHabit(user_id){
 } */
 
 // fetching all posts for this user
+// put in main?
 fetch(`http://localhost:${port}/`)
 .then(resp => resp.json())
 .then(resp => {
-    //console.log(resp) - use this to test resp and endpoints
     resp.forEach(habit => {
         showCurrentlyTracking(habit)
     });
@@ -92,29 +92,32 @@ function showCurrentlyTracking(habit) {
     const habitDesc = document.createElement('p')
     habitName.textContent = habit.description
     const habitFrequency = document.createElement('p')
-    habitFrequency.textContent = habit.frequency
+    habitFrequency.textContent = `${habit.frequency} times per ${habit.day_month}`
     
     const updateButton = document.createElement('input')
     updateButton.setAttribute('type', 'submit')
-    updateButton.setAttribute('value', 'done') // or update
+    updateButton.setAttribute('value', 'update') 
     updateButton.addEventListener('submit', habitUpdate) 
     //add a lil something that shows how many times today already
+    
+    const currentCount = document.createElement('p')
+    currentCount.setAttribute('class', 'currentCount')
+    currentCount.textContent = `${habit.count} times today`
 
-
-    addChart(habit)
-
+    const showChartButton = document.createElement('input')
+    showChartButton.setAttribute('type', 'submit')//could be type button
+    showChartButton.setAttribute('value', 'Show tracking')
+    showChartButton.addEventListener('click', function() { 
+        showChart(habit)
+    });
+    
     ahabit.appendChild(habitName)
     ahabit.appendChild(habitDesc)
     ahabit.appendChild(habitFrequency)
     ahabit.appendChild(updateButton)  
-    //see tracking  
+    ahabit.appendChild(currentCount)
+    ahabit.appendChild(showChartButton) 
 
-    //open modal of a graph - if statement for custom day/every mon/tues/sat etc know if ahead or behind goals?
-    //if daily look at week by bar chart - FOCUS HERE
-    // if weekly look at week and month by bar or line
-    // if monthly look at month/year by bar or line
-    
-    //MULTPLE line graph for ALL HABITS
 }
 
 
@@ -124,7 +127,7 @@ function showChart(habit) {
     var yValues = []//count per day];
     var barColors = []//colour chosen];
 
-    new Chart(`${habit.name}`, {
+    const habitChart = new Chart(`${habit.name}`, {
     type: "bar",
     data: {
         labels: xValues,
@@ -135,15 +138,13 @@ function showChart(habit) {
     },
     options: {...}
     });
+
+    //modal
 }
 
 
-
-//check box - did you do this today? sends form data of current time to backend
-
-
 function habitUpdate(user_id, habit, frequency){
-    
+    //habit.count+1
     /* for date enter count++ */
     fetch(`http://localhost:${port}/${user_id}/`, {
       method: 'PUT',
