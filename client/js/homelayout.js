@@ -3,6 +3,8 @@
 const { Http2ServerRequest } = require('http2');
 const {getAllHabits, getHabit, addNewHabit} = require('./requests');
 
+let port
+let user_id
 //is this where we do window hash endpoint per userID
 //let user_id = window.location.hash.substring(1);
 //HOW TO Define USERID and redirect to there
@@ -35,17 +37,15 @@ function closeModal() {
 const addHabitForm = getElementById('addHabitForm');
 addHabitForm.addEventListener('submit', addNewHabit);
 
-//async POST? e.preventDefault? HOW TO SEND USERID??
-function addNewHabit() {
+
+async function addNewHabit() {
     const formData = new FormData(addHabitForm)
     const formDataSerialised = Object.fromEntries(formData)
 
-    const current = new Date().toLocaleString();
-
-    const jsonObject = {...formDataSerialised, user_id: user_id, dateTime: current}
+    const jsonObject = {...formDataSerialised, user_id: user_id}
 
     try{
-        const response = await fetch (`http://localhost:${port}/${user_id}/`, {
+        const response = await fetch (`http://localhost:${port}/`, {
         method: 'POST', 
         body: JSON.stringify(jsonObject),
         headers: {
@@ -72,7 +72,7 @@ async function loadHabit(user_id){
 } */
 
 // fetching all posts for this user
-fetch(`http://localhost:${port}/${user_id}/`)
+fetch(`http://localhost:${port}/`)
 .then(resp => resp.json())
 .then(resp => {
     //console.log(resp) - use this to test resp and endpoints
@@ -95,46 +95,56 @@ function showCurrentlyTracking(habit) {
     habitFrequency.textContent = habit.frequency
     
     const updateButton = document.createElement('input')
-    //see pseudocode - 
     updateButton.setAttribute('type', 'submit')
-    updateButton.setAttribute('value', 'done') //or update
-    updateButton.addEventListener('submit', habitUpdate) //change func depending on type?
+    updateButton.setAttribute('value', 'done') // or update
+    updateButton.addEventListener('submit', habitUpdate) 
+    //add a lil something that shows how many times today already
+
+
+    addChart(habit)
 
     ahabit.appendChild(habitName)
     ahabit.appendChild(habitDesc)
     ahabit.appendChild(habitFrequency)
+    ahabit.appendChild(updateButton)  
+    //see tracking  
 
-    /* if frequency = yes/no
-    load a tick box that submits a date to backend
-    updateButton.setAttribute('class', 'updateYesNo')
-    should we add limit to number of times this can be pressed?
+    //open modal of a graph - if statement for custom day/every mon/tues/sat etc know if ahead or behind goals?
+    //if daily look at week by bar chart - FOCUS HERE
+    // if weekly look at week and month by bar or line
+    // if monthly look at month/year by bar or line
     
-    else
-    load some level of quantity to send to backend
-    const formQuantity = document.createElement('form')
-    const enterQuantity = document.createElement('input')
-    enterQuantity.setAttribute('class', 'updateQuantity')
-    enterQuantity.setAttribute('name', 'frequency')
-    enterQuantity.setAttribute('type', 'text')
-    formQuanity.appendChild(enterQuantity)
-    formQuanity.appendChild(updateButton)
-
-    */
-
-    //open modal to a graph - if statement for custom day/every mon/tues/sat etc know if ahead or behind goals?
-    
-    
+    //MULTPLE line graph for ALL HABITS
 }
 
 
+function showChart(habit) {
+    var xValues = []//today's date - [-7]];
+    //could do a switch func for days of the week
+    var yValues = []//count per day];
+    var barColors = []//colour chosen];
+
+    new Chart(`${habit.name}`, {
+    type: "bar",
+    data: {
+        labels: xValues,
+        datasets: [{
+        backgroundColor: barColors,
+        data: yValues
+        }]
+    },
+    options: {...}
+    });
+}
+
+
+
 //check box - did you do this today? sends form data of current time to backend
-//add event listener
 
 
 function habitUpdate(user_id, habit, frequency){
-    //definee frequency
-    /* if class = yes/no or quantity empty - get current time 
-    else quantity */
+    
+    /* for date enter count++ */
     fetch(`http://localhost:${port}/${user_id}/`, {
       method: 'PUT',
       body: JSON.stringify({ habit: habit, frequency: frequency }),
@@ -145,20 +155,4 @@ function habitUpdate(user_id, habit, frequency){
 
 
 
-
-
-//NOTES
-
-function updateMain(hash) {
-    main.innerHTML = '';
-    if (hash) {
-        let [category, id] = hash.split('/');
-        id ? loadModalFor(category, id) : loadIndexFor(category)
-    } else {
-        const header = document.createElement('h1');
-        header.className = 'title';
-        header.textContent = "Welcome to the Reading Room";
-        main.appendChild(header);
-    }
-}
 
