@@ -1,0 +1,16 @@
+/* if frequency = yes/no
+    load a tick box that submits a date to backend
+    updateButton.setAttribute('class', 'updateYesNo')
+    should we add limit to number of times this can be pressed?
+    
+    else
+    load some level of quantity to send to backend
+    const formQuantity = document.createElement('form')
+    const enterQuantity = document.createElement('input')
+    enterQuantity.setAttribute('class', 'updateQuantity')
+    enterQuantity.setAttribute('name', 'frequency')
+    enterQuantity.setAttribute('type', 'text')
+    formQuanity.appendChild(enterQuantity)
+    formQuanity.appendChild(updateButton)
+
+    */

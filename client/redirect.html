@@ -39,54 +39,48 @@
       <div class="modal-dialog">
         <div class="modal-content">
           <h1 class="modal_title">Track a new habit:</h1>
-         
+
           <!-- Modal Body -->
           <div class="modal-body">
             <!-- Modal Content -->
-  
+
             <label for="hab_name">Name your habit:</label>
-            <input type="text" id="hab_name" />
+            <input type="text" id="hab_name" placeholder="Habit name" />
             <label for="hab_desc">Describe your habit:</label>
-            <input type="text" id="hab_desc" />
+            <input type="text" id="hab_desc" placeholder="Habit description" />
 
-            <!-- ================== radio section ========================= -->
-            <label for="frequenc">Frequency:</label>
-            <div class="radio-class">
-            <input type="radio" name="monday" id="monday" />
-            <label for="monday">monday</label>
-            <input type="radio" name="tuesday" id="tuesday" />
-            <label for="tuesday">tuesday</label>
-            <input type="radio" name="wednesday" id="wednesday" />
-            <label for="wednesday">wednesday</label>
-            <label for="thursday">thursday</label>
-            <input type="radio" name="thursday" id="thursday" />
-            <label for="weekly">friday</label>
-            <input type="radio" name="fiday" id="thursday" />
-            <label for="saturday">saturday</label>
-            <input type="radio" name="saturday" id="saturday" />
-            <label for="sunda">sunday</label>
-            <input type="radio" name="sunday" id="sunday" />
+            <!-- ================== radio section ========================= --> 
+<div class="frequencies">
+            <label for="frequency">Frequency:</label>
+            <input
+              name="frequency"
+              type="number"
+              id="frequency"
+              class="form-control"
+              placeholder="How many.."
+            />
 
+            <!-- form dropdown day/week/Month -->
+            <label for="daily/weekly/month">times per:</label>
+            <select name="timing" id="timing">
+              <option value="day">day</option>
+              <option value="week">week</option>
+              <option value="month">month</option>
+            </select>
           </div>
-          </div>
+            <!-- Modal Footer-->
 
-          <!-- Modal Footer-->
-          <div class="modal-footer">
-
-           
-            </div>
+            <div class="modal-footer"></div>
             <button type="button" class="btn btn-primary">
               Add this habit
             </button>
-              <button type="button" class="btn btn-danger" data-dismiss="modal">
-                Close
-              </button>
+            <button type="button" class="btn btn-danger" data-dismiss="modal">
+              Close
+            </button>
           </div>
         </div>
       </div>
     </div>
-
-  
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
