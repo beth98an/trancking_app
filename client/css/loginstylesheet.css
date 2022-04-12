@@ -54,7 +54,13 @@ input {
     box-sizing: border-box;
     background-color:;
 }
-  
+
+input[type="password"] {
+
+  width: 100%;
+  padding: 10px;
+
+}
 
 input[type="text"] {
 
@@ -100,7 +106,7 @@ nav {
 padding: 20px;
 
 }
-
+/* 
 .radio-class{
 
   display: flex;
@@ -110,9 +116,11 @@ padding: 20px;
   border: 2px solid black;
   border-radius: 5px;
 
+} */
+
+#hab_name{
+  margin-bottom: 5px;
 }
-
-
 .btn-section{
 
  padding-top: 30px;
@@ -123,14 +131,14 @@ padding: 20px;
  
 
 .btn-danger{
-  width: 50%;
+width: 50%;
 font-size: 30px;
 margin-left: px;
 
 }
 
 .btn-primary {
-
+margin-left: 5px  ;
 font-size: 30px;
 
 }
@@ -168,7 +176,8 @@ font-size: 28px;
  .frequencies{
    display: flex;
    justify-content: space-between;
-   padding: 2rem 0;
+   padding-top:1.5rem;
+   padding-bottom: 0.5rem;
  }
 
  input[type="number"] {
@@ -185,3 +194,13 @@ box-sizing: border-box;
   border-radius: 5px;
   box-sizing: border-box;
  }
+
+ .colour{
+display: flex;
+justify-content: space-around;
+
+ }
+
+ #green {
+  background-color: green;
+}
