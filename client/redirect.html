@@ -23,16 +23,18 @@
   <body>
     <nav><span>Tracking Habits App</span></nav>
 
-    <div class="btntoadd">
-      <button
-        type="button"
-        class="btn btn-success btn-lg mt-2 ml-2"
-        data-toggle="modal"
-        data-target="#meuModal"
-      >
-        &#43;
-      </button>
-    </div>
+                    <label for="frequency" >Frequency:</label>
+                    <input name="frequency" type="number" id="frequency" class="form-control" placeholder="How many..">
+                    
+                    <!-- form dropdown day/week/Month -->
+                    <label for="daily/weekly/month">times per:</label>
+                    <select name="timing" id="timing">
+                        <option value="day">day</option>
+                        <option value="week">week</option>
+                        <option value="month">month</option>
+                      </select>
+                    <!-- choose a colour -->
+
 
     <!-- Modal -->
     <div id="meuModal" class="modal change-modal fade" role="dialog">
