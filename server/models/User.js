@@ -7,7 +7,6 @@ class User {
         this.username = data.username
         this.password = data.password
         this.email = data.email
-        this.name = data.name
     }
 
     static get all(){
@@ -25,7 +24,7 @@ class User {
     static async create(userData) {
         return new Promise (async (resolve, reject) => {
             try {
-                    let users = await db.query(`INSERT INTO users (username, password, email, name) VALUES ($1, $2, $3, $4) RETURNING *;`, [userData.username, userData.password, userData.email, userData.name])
+                    let users = await db.query(`INSERT INTO users (username, password, email) VALUES ($1, $2, $3) RETURNING *;`, [userData.username, userData.password, userData.email])
                     let user = new User(users.rows[0])
                     resolve(user)
 

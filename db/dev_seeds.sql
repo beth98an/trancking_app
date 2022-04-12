@@ -1,7 +1,7 @@
-INSERT INTO users (username, password, email, name) 
+INSERT INTO users (username, password, email) 
 VALUES
- ('AlexPat', 'iloveducks', 'alpat@gmail.com', 'Alex Patient'),
-('Beth', 'bethlovesducks', 'beth@gmail.com', 'Beth Evans');
+ ('AlexPat', 'iloveducks', 'alpat@gmail.com'),
+('Beth', 'bethlovesducks', 'beth@gmail.com');
 
 
 INSERT INTO habits (user_id, name, description, frequency, day_month, color, creation_date) 

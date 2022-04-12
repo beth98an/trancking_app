@@ -1,5 +1,5 @@
 const User = require('../models/User')
-const bcrypt = require('bcryptjs');
+const bcrypt = require('bcrypt');
 
 async function index(req, res) {
     try {
@@ -23,10 +23,10 @@ async function create(req, res) {
     try {
         const salt = await bcrypt.genSalt();
         const hashed = await bcrypt.hash(req.body.password, salt)
-        await User.create({...req.body, password: hashed})
+        let user = await User.create({...req.body, password: hashed})
         res.status(201).json({user})
-        } catch (error) {
-        res.status(500).json({err})
+    } catch (err) {
+        res.status(500).json({err: 'User cannot be created'})
     }
 }
 
