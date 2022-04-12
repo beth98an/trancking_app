@@ -14,92 +14,82 @@
     formQuanity.appendChild(updateButton)
 
     */
-
-
-    Skip to content
-Search or jump to…
-Pull requests
-Issues
-Marketplace
-Explore
- 
-@evelyn516 
-Nowshad10
-/
-auth-practise
-Private
-Code
-
-
-
-
-
-   
-const express = require('express');
-const cors = require('cors');
-const app = express();
-app.use(cors());
-app.use(express.json());
-const bcrypt = require('bcryptjs');
-
-const port = process.env.PORT || 3000
-
-const Users = require('./models/Users')
-
-app.get('/', (req, res) => {
-    res.send('Hello World!')
-});
-
-app.get('/users', async (req, res) => {
-    try{
-        const users = await Users.all
-        res.json({users})
-    } catch (err) {
-        res.status(500).json(err)
+    async function requestLogin(e){
+        e.preventDefault();
+        try {
+            const options = {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(Object.fromEntries(new FormData(e.target)))
+            }
+            const r = await fetch(`http://localhost:3000/auth/login`, options)
+            const data = await r.json()
+            if (data.err){ throw Error(data.err); }
+            login(data);
+        } catch (err) {
+            console.warn(`Error: ${err}`);
+        }
     }
-});
-
-app.post('/register', async (req, res) => {
-    try {
-        const salt = await bcrypt.genSalt();
-        const hashed = await bcrypt.hash(req.body.passkey, salt)
-        await Users.create({...req.body, passkey: hashed})
-        res.status(201).json({msg: 'User created!'})
-    } catch (error) {
-        res.status(500).json({err: 'User cannot be created'})
+    
+    function login(data){
+        localStorage.setItem('username', data.user);
+        location.hash = '#feed';
     }
-})
-
-app.post('/login', async (req, res) => {
-    try {
-       let user = await Users.findByUsername(req.body.username) 
-       if (!user) {
-           throw new Error('No user with this username')
-       }
-       const passwordCheck = bcrypt.compare(req.body.passkey, user.passkey)
-       if (passwordCheck) {
-           res.status(200).json({ user: user.username})
-       } else {
-           throw new Error('User could not be authenticated')
-       }
-    } catch (err) {
-        res.status(401).json({ err: 'Naughty naughty!' })
+    
+    function logout(){
+        localStorage.clear();
+        location.hash = '#login';
     }
-})
-
-app.listen(port, () => {
-    console.log(`Express departing from port ${port}.`)
-});
-© 2022 GitHub, Inc.
-Terms
-Privacy
-Security
-Status
-Docs
-Contact GitHub
-Pricing
-API
-Training
-Blog
-About
-Loading complete
+    
+    function currentUser(){
+        const username = localStorage.getItem('username')
+        return username;
+    }
+    ```
+    * The function `login()` is triggered with the `requestLogin()` function and stores the string on `data.user` on the browser with the key of `username`
+    * Instead of **username** we’d like to store the **token**
+    
+    
+    
+    
+    ### Viewing the current database
+    
+    1. Check if containers are running `docker ps` 
+    If not run `docker compose up`
+    
+    2. We can enter the database with: 
+    `docker exec -it <db-container-name> sql -U <user-name> <db-name>`
+    * The container, user and database name should all be available in the **.yaml** file 
+    
+    3. See data stored with: 
+    `SELECT * FROM users;`
+    It’ll show all our users in the database with their passwords easily visible. 
+    
+    #### What information do we need
+    It’s then important to think about who should be able to access certain information on the database and if information is to be displayed do they need to see all of it?
+    
+    User data example:
+    ```
+    {
+        "username": "emile",
+        "email": "emile@email.com",
+        "passwordDigest": "hummushummushummus"
+    }
+    ```
+    
+    
+    ### Continued… Adding Authorisation to a project
+    
+    #### Package helpers
+    * `bcrypt` - [bcrypt - npm](https://www.npmjs.com/package/bcrypt)
+    Will help us to generate a **salt**, choosing a **hashing algorithm** 
+    
+    * We can install directly in the container
+    1. exit the database - `exit`
+    2. enter the server container:
+    `docker exec -it <server-container-name> bash`
+    3. check location: `ls` need to have `package.json` in current directory. 
+    4. `npm i bcrypt`
+    
+    When a user registers we’re going to need to generate a unique version of the password and also compare the plain text password to the encrypted version in the database. 
+    

@@ -3,10 +3,8 @@
 const { Http2ServerRequest } = require('http2');
 const {getAllHabits, getHabit, addNewHabit} = require('./requests');
 
-let port
-let user_id
-//is this where we do window hash endpoint per userID
-//let user_id = window.location.hash.substring(1);
+let port = 3000
+let user_id = window.location.hash.substring(1);
 //HOW TO Define USERID and redirect to there
 
 //modal open and close

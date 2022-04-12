@@ -58,6 +58,6 @@ async function destroy(req, res) {
     }
 }
 
-module.exports = { index, create, show, destroy }
+module.exports = { index, create, show, destroy, login }
 
 
