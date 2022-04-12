@@ -33,3 +33,12 @@ body{
 
 
 
+.habitContainer{
+    display: block;
+
+}
+
+
+.updateButton{
+    display: block;
+}

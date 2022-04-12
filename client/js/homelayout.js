@@ -1,10 +1,18 @@
-/* THIS IS A COPY FROM ANOTHER REPO FOR IDEAS */
+//need prevent default/empty form data submit etc
 
+const { Http2ServerRequest } = require('http2');
+const {getAllHabits, getHabit, addNewHabit} = require('./requests');
 
+let port
+let user_id
+//is this where we do window hash endpoint per userID
+//let user_id = window.location.hash.substring(1);
+//HOW TO Define USERID and redirect to there
 
-
+//modal open and close
 const newHabitButton = document.getElementById('newHabitButton')
 newHabitButton.addEventListener('click', openModal)
+
 const newHabitModal = document.getElementById('newHabitModal')
 
 const closeBtn = document.getElementById('closeBtn')
@@ -18,82 +26,133 @@ function closeModal() {
     newHabitModal.display = 'none';
 }
 
-//this should close modal if you click outside of it but currently
-/* window.onclick = function(event) {
-    if (event.target != newHabitModal) {
-        if (newHabitModal.style.display === "block") {
-            newHabitModal.style.display = "none";
+
+
+//submit form in modal
+
+/* data we want to send = habitData.user_id, habitData.name, habitData.desription, habitData.frequency, habitData.color */
+
+//amount of tracking - stretch
+
+const addHabitForm = getElementById('addHabitForm');
+addHabitForm.addEventListener('submit', addNewHabit);
+
+
+async function addNewHabit() {
+    const formData = new FormData(addHabitForm)
+    const formDataSerialised = Object.fromEntries(formData)
+
+    const jsonObject = {...formDataSerialised, user_id: user_id}
+
+    try{
+        const response = await fetch (`http://localhost:${port}/`, {
+        method: 'POST', 
+        body: JSON.stringify(jsonObject),
+        headers: {
+            'Content-Type': 'application/json'
         }
-        
-    }
-  }
- */
-
-
-
-
-
-
-const {getAllPosts, getPost, post} = require('./requests');
-
-window.addEventListener('hashchange', update);
-window.addEventListener('load', update);
-
-
-const inputForm = document.getElementById('input-form')
-inputForm.addEventListener('submit', post);
-
-const form = document.getElementById('form');
-const postContent = document.querySelector('#post');
-
-async function update() {
-    let id = window.location.hash.substring(1);
-    if (id) {
-        let data = await getPost(id);
-        form.classList.add("hidden");
-        postContent.classList.remove("hidden")
-        if (typeof data !== 'undefined') {
-            document.querySelector("#post-title").textContent = data.habitTitle;
-            document.querySelector("#post-name").textContent = data.author;
-            document.querySelector("#post-body").textContent = data.body;
-        } else {
-            document.querySelector("#post-title").textContent = 'Post does not exist'
-        }
-    } else {
-        document.querySelector("#post-title").textContent = "";
-        document.querySelector("#post-name").textContent = "";
-        document.querySelector("#post-body").textContent = "";
-        form.classList.remove("hidden");
-        postContent.classList.add("hidden");
-        fadeClassChecker(document.querySelector('#title'))
-        fadeClassChecker(document.querySelector('#author'))
-        fadeClassChecker(document.querySelector('#body'))
+        })
+        const json = await response.json();
+        console.log(json)
+    }catch(e){
+        console.error(e);
+        alert('There was an error')
     }
 }
 
-function fadeClassChecker(input) {
-    let label = document.querySelector(`.label-${input.id}`);
-    if(!input.value){
-        label.classList.remove('fade');
-        label.classList.add('fade-hidden');
-    } else {
-        label.classList.remove('fade-hidden');
-        label.classList.add('fade');
-    }
+
+
+
+//load container below
+
+/* ???
+async function loadHabit(user_id){
+    const data = await getAllHabits(user_id);
+    data.forEach(habit => renderCard(habit));
+} */
+
+// fetching all posts for this user
+fetch(`http://localhost:${port}/`)
+.then(resp => resp.json())
+.then(resp => {
+    //console.log(resp) - use this to test resp and endpoints
+    resp.forEach(habit => {
+        showCurrentlyTracking(habit)
+    });
+    
+})
+
+//should this be async?
+function showCurrentlyTracking(habit) {
+    const ahabit = document.createElement('div')
+    ahabit.setAttribute('class', 'habitContainer');
+    
+    const habitName = document.createElement('h3')
+    habitName.textContent = habit.name
+    const habitDesc = document.createElement('p')
+    habitName.textContent = habit.description
+    const habitFrequency = document.createElement('p')
+    habitFrequency.textContent = habit.frequency
+    
+    const updateButton = document.createElement('input')
+    updateButton.setAttribute('type', 'submit')
+    updateButton.setAttribute('value', 'done') // or update
+    updateButton.addEventListener('submit', habitUpdate) 
+    //add a lil something that shows how many times today already
+
+
+    addChart(habit)
+
+    ahabit.appendChild(habitName)
+    ahabit.appendChild(habitDesc)
+    ahabit.appendChild(habitFrequency)
+    ahabit.appendChild(updateButton)  
+    //see tracking  
+
+    //open modal of a graph - if statement for custom day/every mon/tues/sat etc know if ahead or behind goals?
+    //if daily look at week by bar chart - FOCUS HERE
+    // if weekly look at week and month by bar or line
+    // if monthly look at month/year by bar or line
+    
+    //MULTPLE line graph for ALL HABITS
 }
 
-document.querySelector('.back-btn').addEventListener('click', () => {
-    window.location.hash = ''
-});
 
-document.querySelector("#title").addEventListener('input', updateLabels)
-document.querySelector("#author").addEventListener('input', updateLabels)
+function showChart(habit) {
+    var xValues = []//today's date - [-7]];
+    //could do a switch func for days of the week
+    var yValues = []//count per day];
+    var barColors = []//colour chosen];
 
-document.querySelector("#body").addEventListener('input', updateLabels)
+    new Chart(`${habit.name}`, {
+    type: "bar",
+    data: {
+        labels: xValues,
+        datasets: [{
+        backgroundColor: barColors,
+        data: yValues
+        }]
+    },
+    options: {...}
+    });
+}
 
-function updateLabels(e) {
-    fadeClassChecker(e.target)
+
+
+//check box - did you do this today? sends form data of current time to backend
+
+
+function habitUpdate(user_id, habit, frequency){
+    
+    /* for date enter count++ */
+    fetch(`http://localhost:${port}/${user_id}/`, {
+      method: 'PUT',
+      body: JSON.stringify({ habit: habit, frequency: frequency }),
+      headers: { 'Content-Type': 'application/json' },
+    })
+    location.reload();
 };
+
 
 
 
