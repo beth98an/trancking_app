@@ -42,6 +42,7 @@ class User {
                 let user = new User(userData.rows[0])
                 resolve(user)
             } catch (err) {
+                console.log('error 4')
                 reject('User not found!')
             }
         })

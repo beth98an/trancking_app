@@ -17,7 +17,7 @@ CREATE TABLE habits (
     name VARCHAR(20),
     description VARCHAR(100), 
     frequency INT,
-    daily_monthly VARCHAR(20), 
+    day_month VARCHAR(20), 
     color VARCHAR (20),
     creation_date DATE DEFAULT CURRENT_DATE
 );

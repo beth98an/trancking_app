@@ -1,20 +1,23 @@
-const loginForm = document.querySelector('#login')
+const loginForm = document.getElementById("login")
 loginForm.addEventListener('submit', requestLogin)
 
 async function requestLogin(e){
     e.preventDefault();
-
+    const loginData = new FormData(loginForm)
+    const formDataSerialised = Object.fromEntries(loginData)
+    console.log(formDataSerialised)
     try {
         const options = {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(Object.fromEntries(new FormData(e.target)))
+            body: JSON.stringify((formDataSerialised))
         }
         const r = await fetch(`http://localhost:3000/users/login/`, options)
         const data = await r.json()
         if (data.err){ throw Error(data.err); }
         login(data);
     } catch (err) {
+        console.log('error 3')
         console.warn(`Error: ${err}`);
     }
 }
@@ -22,7 +25,10 @@ async function requestLogin(e){
 function login(data){
     localStorage.setItem('username', data.username);
     location.hash = `#${data.username}/`;
+    console.log('YOURE HERE')
 }
+
+//localhost/3000/#AlexPat/habits
 
 function logout(){
     localStorage.clear();
