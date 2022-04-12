@@ -7,4 +7,4 @@ VALUES
 INSERT INTO habits (user_id, name, question, frequency, color, creation_date) 
 VALUES 
 (1, 'Exercise', 'Have you exercised today?', 'Once per day', 'red', '2022-04-08'),
-(2, 'Run', 'Have you ran today?', 'Once per day', 'yellow', '2022-04-11');
+(2, 'Run', 'Have you run today?', 'Once per day', 'yellow');
