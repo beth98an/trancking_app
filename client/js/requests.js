@@ -21,7 +21,7 @@ async function getHabit(id) {
 };
 
 // function that sends the post to the server and then redirects to the route.
-async function newHabit(e) {
+async function addNewHabit(e) {
     e.preventDefault();
     try {
         const options = {
