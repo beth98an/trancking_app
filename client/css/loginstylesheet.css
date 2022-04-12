@@ -1,63 +1,69 @@
 * {
-    margin: 0;
-    padding: 0;
-    font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
-  }
+  margin: 0;
+  padding: 0;
+  font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
+}
   
-  body {
-    padding: 50px;
-    background-color: black;
-  }
-  .header{
+body {
+  padding: 50px;
+  background-color: black;
+}
+
+.header {
   width: 100%;
   display: flex;
   justify-content: center;
-  margin-bottom: 30px;
-  margin-top: 30px;
+  margin-bottom: 10px;
+  margin-top: 5px;
   padding: 10px;
   font-size: 50px;
-color: white;
+  color: white;
 }
 
 fieldset {
     width: 40%;
     margin: auto;
-    padding: 10px;
+    padding: 30px;
     border: solid white 5px;
     border-radius: 10px;
     min-width: 200px;
     background-color: #f94144;
-    color: white;
-    
-  }
+    color: white;  
+}
   
-  legend {
+legend {
     
-    padding: 10px;
-    font-size: 30px;
-    color: white;
-  }
+  padding: 10px;
+  font-size: 30px;
+  color: white;
 
-  label {
+}
+
+label {
+
     display: block;
     font-size: 25px;
-  }
-  input {
+}
+
+input {
     padding: 3px;
     color: black;
     border: 2px solid black;
     border-radius: 5px;
     box-sizing: border-box;
     background-color:;
-  }
+}
   
 
-  input[type="text"] {
+input[type="text"] {
+
     width: 100%;
     padding: 10px;
-  }
 
-  .login-btn {
+}
+
+.login-btn {
+
     margin-top: 20px;
     margin-bottom: 10px;
     padding: 10px 80px;
@@ -66,56 +72,96 @@ fieldset {
     left: 28%;
     font-size: 30px;
 
-  }
+}
 
 
-  .myForm {
-  padding: 50px;
+.myForm {
+
+  padding: 10px;
   background-color: black;
-  }
+  
+}
 
   
-  nav {
-       color: #ffff;
-       font-size: 60px;
-       font-weight: bold;
-       border-bottom: 1px solid #38444d;
-       text-align: center;
-     }
+nav {
+
+  color: #ffff;
+  font-size: 60px;
+  font-weight: bold;
+  border-bottom: 1px solid #38444d;
+  text-align: center;
+
+}
+
 
 .change-modal .modal-content{
+
 padding: 20px;
 
+}
 
- }
+.radio-class{
 
- .radio-class{
-   display: flex;
-   justify-content: space-around;
-   flex-wrap: wrap;
-
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
   padding: 10px;
   border: 2px solid black;
   border-radius: 5px;
- }
 
- .btn-danger{
+}
+
+
+.btn-section{
+
+ padding-top: 30px;
+ display: flex;
+ justify-content: space-around;
+
+}
+ 
+
+.btn-danger{
+
 font-size: 30px;
+
 }
+
 .btn-primary {
-  font-size: 30px;
-  }
 
-  
-.btntoadd{
+font-size: 30px;
 
-  font-size: 50px;
 }
+
 
 .btn-register{
-width: 200px;
+
 height: 70px;
-background-color: white;
-color: black;
+width: 50%;
+font-size: 28px;
 
 }
+
+
+.btn-login {
+
+ margin-top: 7.5px;
+ height: 70px;
+ width: 50%;
+ 
+}
+
+
+#reg_email  {
+ width: 100%;
+ height: 50px;
+ 
+}
+
+#reg_password {
+  width: 100%;
+  height: 50px;
+ }
+
+
+ 

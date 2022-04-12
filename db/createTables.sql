@@ -15,7 +15,7 @@ CREATE TABLE habits (
     habit_id SERIAL PRIMARY KEY,
     user_id INT,
     name VARCHAR(20),
-    question VARCHAR(100),
+    description VARCHAR(100),
     frequency VARCHAR(20),
     color VARCHAR (20),
     creation_date DATE DEFAULT CURRENT_DATE
