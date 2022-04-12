@@ -2,7 +2,7 @@ const Habit = require('../models/Habit')
 
 async function index(req, res) {
     try {
-        const habit = await Habit.all;
+        const habit = await Habit.all
         res.status(200).json(habit)
     } catch (err) {
         res.status(500).json({err})
