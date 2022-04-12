@@ -48,7 +48,7 @@ class Habit {
             }  
         )
     }
-
+  
     destroy() {
         return new Promise (async (resolve, reject) => {
             try {
@@ -59,10 +59,6 @@ class Habit {
             }
         })
     }
-
-
-
-
 }    
 
 module.exports = Habit
