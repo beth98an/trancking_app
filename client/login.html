@@ -17,7 +17,8 @@
       crossorigin="anonymous"
     />
     <link rel="stylesheet" href="css/loginstylesheet.css" />
-    <title>Welcome to our app</title>
+    <title>Habitat</title>
+    <script defer src="./js/auth.js"></script>
   </head>
 
   <body>
@@ -31,24 +32,24 @@
           <legend><h1>Login:</h1></legend>
           <label for="username">Username:</label>
           <input type="text" name="username" id="username" />
-          <label for="password">Password:</label>
-          <input type="text" name="password" id="password" />
           
-       <div class="btn-section">
-           
-            <button type="submit" class="btn btn-login btn-primary">
-              Login
-            </button>
+          <label for="password">Password:</label>
+          <input type="password" name="password" id="password" />
 
-            <button
-            type="button"
-            class="btn btn-success btn-register btn-lg mt-2 ml-2"
-            data-toggle="modal"
-            data-target="#meuModal"
-          >
-            Register
-          </button>
-        </div>
+          <div class="btn-section">
+              
+                <button type="submit" class="btn btn-login btn-primary">Login</button>
+
+
+                <button
+                type="button"
+                class="btn btn-success btn-register btn-lg mt-2 ml-2"
+                data-toggle="modal"
+                data-target="#meuModal"
+              >
+                Register
+              </button>
+            </div>
           
           <!-- <input
             type="submit"
@@ -64,20 +65,22 @@
     <!-- Modal Register -->
 
     <!-- Modal -->
+    <form action="" class="register" id="register">
     <div id="meuModal" class="modal change-modal fade" role="dialog">
       <div class="modal-dialog">
         <div class="modal-content">
+          
           <h1 class="modal_title">Register:</h1>
 
           <!-- Modal Body -->
           <div class="modal-body">
         <!-- Modal Content -->
             <label for="reg_name">Name:</label>
-            <input type="text" id="reg_name" />
+            <input type="text" name="username" id="reg_name" />
             <label for="reg_email">Email:</label>
-            <input type="email" id="reg_email" />
+            <input type="email" name="email" id="reg_email" />
             <label for="reg_password">Password:</label>
-            <input type="password" id="reg_password" />
+            <input type="password" name="password" id="reg_password" />
 
           </div>
 
@@ -86,13 +89,14 @@
             <!-- <button type="button" class="btn btn-danger" data-dismiss="modal">
               Close
             </button> -->
-            <button type="button" class="btn btn-primary">
+            <button type="submit" class="btn btn-primary">
               Register 
             </button>
           </div>
         </div>
       </div>
     </div>
+    </form>
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
