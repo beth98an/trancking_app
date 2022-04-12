@@ -30,6 +30,23 @@ async function create(req, res) {
     }
 }
 
+async function login(req, res) {
+    try {
+        let user = await Users.findByUsername(req.body.username) 
+        if (!user) {
+            throw new Error('No user with this username')
+        }
+        const passwordCheck = bcrypt.compare(req.body.password, user.password)
+        if (passwordCheck) {
+            res.status(200).json({ user: user.username})
+        } else {
+            throw new Error('User could not be authenticated')
+        }
+     } catch (err) {
+         res.status(401).json({err: 'Username or Password incorrect!'})
+     }
+ }
+
 
 async function destroy(req, res) {
     try {

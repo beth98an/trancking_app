@@ -35,10 +35,10 @@ class User {
         })
     }
 
-    static async show(user_id) {
+    static async findByUsername(username) {
         return new Promise (async (resolve, reject) => {
             try {
-                let userData = await db.query(`SELECT * FROM users WHERE user_id = $1;`, [user_id])
+                let userData = await db.query(`SELECT * FROM users WHERE username = $1;`, [username])
                 let user = new User(userData.rows[0])
                 resolve(user)
             } catch (err) {
@@ -46,6 +46,8 @@ class User {
             }
         })
     }
+
+
 
     destroy() {
         return new Promise (async (resolve, reject) => {
