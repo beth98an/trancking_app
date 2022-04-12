@@ -4,7 +4,15 @@
   "description": "## App where users can add a habbit and keep tracking it...(to be finished)",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon index.js"
+    "start": "nodemon index.js",
+    "test": "jest --setupFiles ./tests/config.js --watchAll --detectOpenHandles --runInBand --verbose",
+    "coverage": "jest --setupFiles ./tests/config.js --testPathPattern=/tests/ --coverage --watchAll --detectOpenHandles"
+  },
+  "jest": {
+    "testEnvironment": "node",
+    "coveragePathIgnorePatterns": [
+      "/node_modules/"
+    ]
   },
   "repository": {
     "type": "git",
@@ -21,7 +29,6 @@
     "bcryptjs": "^2.4.3",
     "cors": "^2.8.5",
     "express": "^4.17.3",
-    "nodemon": "^2.0.15",
     "pg": "^8.3.3"
   }
 }

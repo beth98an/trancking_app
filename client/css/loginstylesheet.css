@@ -6,8 +6,9 @@
 }
   
 body {
-  padding: 50px;
+  
   background-color: black;
+  height: 1200px;
 }
 
 .header {
@@ -90,14 +91,21 @@ input[type="text"] {
 }
 
   
-nav {
-
-  color: #ffff;
+.nav_bar {
+  width: 100%;
+  text-align: center;
+  color: white;
   font-size: 60px;
   font-weight: bold;
-  border-bottom: 1px solid #38444d;
-  text-align: center;
+  background-color: black;
+  position: fixed;
+  
+}
 
+.top-buttons{
+
+  display: flex;
+  justify-content: center;
 }
 
 
@@ -121,19 +129,39 @@ padding: 20px;
 #hab_name{
   margin-bottom: 5px;
 }
+
+/* .nav_bar{
+  position: fixed;
+} */
+
 .btn-section{
 
- padding-top: 30px;
- display: flex;
- justify-content: space-around;
+  padding-top: 30px;
+  display: flex;
+  justify-content: space-around;
+  
+ 
+ }
+
+.btn-add{
+width: 12rem;
+height:6rem ;
+font-size: 3rem;
 
 }
- 
 
-.btn-danger{
+.btn-logout{
+width: 12rem;
+height: 6rem;
+font-size: 3rem;
+margin-top: 8px;
+margin-left: 3rem;
+}
+.btn-close  {
 width: 50%;
 font-size: 30px;
-margin-left: px;
+
+
 
 }
 
@@ -160,6 +188,7 @@ font-size: 28px;
  width: 50%;
  
 }
+
 
 
 #reg_email  {
@@ -189,10 +218,20 @@ box-sizing: border-box;
  } 
 
  #timing {
-   height: 35px;
+  height: 35px;
   border: 2px solid black;
   border-radius: 5px;
   box-sizing: border-box;
+ }
+
+ #colours{
+  height: 35px;
+  width: 30%;
+  border: 2px solid black;
+  border-radius: 5px;
+  box-sizing: border-box;
+
+
  }
 
  .colour{
