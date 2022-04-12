@@ -1,5 +1,39 @@
 /* THIS IS A COPY FROM ANOTHER REPO FOR IDEAS */
 
+
+
+
+const newHabitButton = document.getElementById('newHabitButton')
+newHabitButton.addEventListener('click', openModal)
+const newHabitModal = document.getElementById('newHabitModal')
+
+const closeBtn = document.getElementById('closeBtn')
+closeBtn.addEventListener('click', closeModal);
+
+function openModal() {
+    newHabitModal.style.display = 'block';
+}
+
+function closeModal() {
+    newHabitModal.display = 'none';
+}
+
+//this should close modal if you click outside of it but currently
+/* window.onclick = function(event) {
+    if (event.target != newHabitModal) {
+        if (newHabitModal.style.display === "block") {
+            newHabitModal.style.display = "none";
+        }
+        
+    }
+  }
+ */
+
+
+
+
+
+
 const {getAllPosts, getPost, post} = require('./requests');
 
 window.addEventListener('hashchange', update);
