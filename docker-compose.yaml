@@ -2,30 +2,14 @@ version: '3'
 services:
   server:
     image: node:14
-    working_dir: /server
-    ports: 
-      - 3000:3000
-    environment: 
-      - PGUSER=rubberduckers
-      - PGHOST=db
-      - PGPASSWORD=rubberduck
-      - PGDATABASE=habit-tracker
-      - PGPORT=5432
-    depends_on:
-      - db
+    working_dir: /code
     volumes:
       - type: bind
         source: ./server
-        target: /server
-    command: bash -c "npm install && npm start"
+        target: /code
   db:
     image: postgres:latest
-    volumes:
-      - "dbdata:/var/lib/postgresql/data"
-      - "./db/:/docker-entrypoint-initdb.d/:ro"
     environment: 
-      - POSTGRES_DB=habit-tracker
       - POSTGRES_USER=rubberduckers
-      - POSTGRES_PASSWORD=rubberduck
-volumes:
-  dbdata:
+    volumes:
+      - "./db:/docker-entrypoint-initdb.d/:ro"

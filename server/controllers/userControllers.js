@@ -12,7 +12,7 @@ async function index(req, res) {
 
 async function show(req, res) {
     try {
-        const user = await User.show(req.params.id)
+        const user = await User.show(req.params.id);
         res.status(200).json(user)
     } catch (err) {
         res.status(404).json({err})
@@ -54,10 +54,9 @@ async function destroy(req, res) {
         await user.destroy()
         res.status(204).end()
     } catch (err) {
-        res.status(404).json({err})
-    }
+        res.status(404).json({err});
+    };
 }
 
 module.exports = { index, create, show, destroy, login }
-
 
