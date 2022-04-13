@@ -82,23 +82,29 @@ function showTracking(habits) {
     ahabit.setAttribute('class', 'habitContainer');
     
     const habitName = document.createElement('h3')
+    habitName.setAttribute('class', 'hab_title');
     habitName.textContent = habit.name
     const habitDesc = document.createElement('p')
-    habitName.textContent = habit.description
+    habitDesc.setAttribute('class', 'habit_Desc');
+    habitDesc.textContent = habit.description
     const habitFrequency = document.createElement('p')
+    habitFrequency.setAttribute('class', 'hab_Descript');
     habitFrequency.textContent = `${habit.frequency} times per ${habit.day_month}`
     
     const updateButton = document.createElement('input')
+    updateButton.setAttribute('class', 'btn_update');
     updateButton.setAttribute('type', 'submit')
     updateButton.setAttribute('value', 'update') 
     /* updateButton.addEventListener('submit', habitUpdate(habit.habit_id))  */
     
     //add a lil something that shows how many times today already
     const currentCount = document.createElement('p')
+    currentCount.setAttribute('class', 'hab_count');
     currentCount.setAttribute('class', 'currentCount')
     currentCount.textContent = `${habit.count} times today` //habit.day_month.count?? where day_month === current
 
     const showChartButton = document.createElement('input')
+    showChartButton.setAttribute('class', 'btn_chart');
     showChartButton.setAttribute('type', 'submit')
     showChartButton.setAttribute('value', 'Show tracking')
     showChartButton.addEventListener('click', openChartModal);
