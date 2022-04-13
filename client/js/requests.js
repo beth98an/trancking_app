@@ -38,7 +38,7 @@ async function addNewHabit(e) {
     }
 }
 
-module.exports = {getAllHabits, getHabit, newHabit}
+module.exports = {getAllHabits, getHabit, addNewHabit}
 
 
 //do we need crud functionality??
