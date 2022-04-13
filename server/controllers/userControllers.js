@@ -48,7 +48,7 @@ async function login(req, res) {
         if (passwordCheck) {
             console.log('CORRECT PASSWORD')
             console.log(passwordCheck)
-            res.status(200).json({ user: user.username})
+            res.status(200).json({ username: user.username})
         } else {
             console.log('error 2')
             throw new Error('User could not be authenticated')
