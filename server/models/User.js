@@ -1,5 +1,4 @@
 const db = require('../dbLink');
-// const { propfind } = require('../routes/users');
 
 class User {
     constructor(data){
@@ -16,7 +15,7 @@ class User {
                 let users = userData.rows.map(u => new User(u))
                 resolve (users)
             } catch (err) {
-                reject('Book not found')
+                reject('User not found')
             }
         })
     }
