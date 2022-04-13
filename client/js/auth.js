@@ -30,12 +30,11 @@ function login(data){
     console.log('YOURE IN')
 }
 
-//localhost/3000/#AlexPat/habits
-
 /* function logout(){
     localStorage.clear();
     location.hash = '#login/';
 } */
+
 
 function currentUser(){
     const username = localStorage.getItem('username')
