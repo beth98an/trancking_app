@@ -37,8 +37,9 @@ describe ('habit endpoints', () => {
         .send({
             user_id: 2,
             name: 'newHabit',
-            question: 'newHabit question',
-            frequency: 'newHabit frequency',
+            description: 'newHabit description',
+            frequency: 4,
+            day_month: 'newHabit frequency',
             color: 'red'
         })
         expect(res.statusCode).toEqual(201)
@@ -53,7 +54,8 @@ describe ('habit endpoints', () => {
             user_id: 2,
             name: 'newHabitIsToBeCreated',
             question: 'newHabit question',
-            frequency: 'newHabit frequency',
+            frequency: 4,
+            day_month: 'newHabit frequency',
             color: 'red'
         })
         expect(res.statusCode).toEqual(422)

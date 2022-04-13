@@ -1,7 +1,7 @@
 {
   "name": "trancking_app",
   "version": "1.0.0",
-  "description": "## App where users can add a habbit and keep tracking it...(to be finished)",
+  "description": "## App where users can add a habit and keep tracking it...(to be finished)",
   "main": "index.js",
   "scripts": {
     "start": "nodemon index.js",
@@ -30,6 +30,8 @@
     "cors": "^2.8.5",
     "nodemon": "^2.0.15",
     "express": "^4.17.3",
-    "pg": "^8.3.3"
+    "pg": "^8.3.3",
+    "jest": "^27.5.1",
+    "supertest": "^6.2.2"
   }
 }
