@@ -1,14 +1,12 @@
-//need prevent default/empty form data submit etc
-
-const { Http2ServerRequest } = require('http2');
-const {getAllHabits, getHabit, addNewHabit} = require('./requests');
 
 let port = 3000
-let user_id = window.location.hash.substring(1);
+let username = window.location.hash.substring(1);
+//require auth currentuser()
 //HOW TO Define USERID and redirect to there
 
+
 //modal open and close
-const newHabitButton = document.getElementById('newHabitButton')
+/* const newHabitButton = document.getElementById('newHabitButton')
 newHabitButton.addEventListener('click', openModal)
 
 const newHabitModal = document.getElementById('newHabitModal')
@@ -23,24 +21,23 @@ function openModal() {
 function closeModal() {
     newHabitModal.display = 'none';
 }
-
+ */
 
 
 //submit form in modal
-
-/* data we want to send = habitData.name, habitData.desription, habitData.frequency, habitData.color */
-
-//amount of tracking - stretch
-
-const addHabitForm = getElementById('addHabitForm');
-addHabitForm.addEventListener('submit', addNewHabit);
+const addHabitForm = document.getElementById('addHabitForm');
+addHabitForm.addEventListener('submit', addHabit);
 
 
-async function addNewHabit() {
+async function addHabit(e) {
+    e.preventDefault();
     const formData = new FormData(addHabitForm)
     const formDataSerialised = Object.fromEntries(formData)
+    console.log(formDataSerialised)
 
-    try{
+    addNewHabit(formDataSerialised)
+
+/*     try{
         const response = await fetch (`http://localhost:${port}/user/`, {
         method: 'POST', 
         body: JSON.stringify(formDataSerialised),
@@ -53,7 +50,7 @@ async function addNewHabit() {
     }catch(e){
         console.error(e);
         alert('There was an error')
-    }
+    } */
 }
 
 
@@ -62,14 +59,14 @@ async function addNewHabit() {
 //load container below
 
 /* ???
-async function loadHabit(user_id){
-    const data = await getAllHabits(user_id);
+async function loadHabit(username){
+    const data = await getAllHabits(username;
     data.forEach(habit => renderCard(habit));
 } */
 
 // fetching all posts for this user
 // put in main?
-fetch(`http://localhost:${port}/`)
+fetch(`http://localhost:${port}/habits`)
 .then(resp => resp.json())
 .then(resp => {
     resp.forEach(habit => {
@@ -93,7 +90,7 @@ function showCurrentlyTracking(habit) {
     const updateButton = document.createElement('input')
     updateButton.setAttribute('type', 'submit')
     updateButton.setAttribute('value', 'update') 
-    updateButton.addEventListener('submit', habitUpdate) 
+    updateButton.addEventListener('submit', habitUpdate(habit.habit_id)) 
     
     //add a lil something that shows how many times today already
     const currentCount = document.createElement('p')
@@ -105,17 +102,17 @@ function showCurrentlyTracking(habit) {
     showChartButton.setAttribute('value', 'Show tracking')
     showChartButton.addEventListener('click', openChartModal);
 
-    const habitChart = new Chart(`${habit.name}`, {
+    /* const habitChart = new Chart(`${habit.name}`, {
         type: "bar",
         data: {
             labels: [habit.date, habit.date-1, habit.date-2, habit.date-3, habit.date-4, habit.date-5, habit.date-6]
             datasets: [{
             backgroundColor: habit.colour,
-            data: [habit.date.count, habit.date-1.count, habit.date-2.count...] //count per day];
+            data: [habit.date.count, habit.date-1.] //count per day];
             }]
         },
         options: {...}
-        });
+        }); */
     //create modal.display=none
     //modal.appendChild habitChart
     
@@ -134,17 +131,7 @@ function openChartModal() {
 
 
 
-function habitUpdate(user_id, habit, count){
-    //access current count
-    //habit.count+1
-    /* for date enter count++ */
-    fetch(`http://localhost:${port}/${user_id}/`, {
-      method: 'PUT',
-      body: JSON.stringify({ habit: habit, count: count }),
-      headers: { 'Content-Type': 'application/json' },
-    })
-    location.reload();
-};
+
 
 
 

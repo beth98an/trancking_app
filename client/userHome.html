@@ -1,10 +1,10 @@
-
 <!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/png" href="./images/favicon2.png">
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -18,6 +18,7 @@
       crossorigin="anonymous"
     />
     <link rel="stylesheet" href="css/loginstylesheet.css" />
+    <script defer src="js/homelayout.js"></script>
     <title>Habitat</title>
   </head>
 
@@ -61,14 +62,14 @@
           <!-- Modal Body -->
           <div class="modal-body">
             <!-- Modal Content -->
-
-            <label for="hab_name">Name your habit:</label>
-            <input type="text" id="hab_name" placeholder="Habit name" />
+            <form action="", id="addHabitForm">
+            <label for="name">Name your habit:</label>
+            <input type="text" name="name" id="hab_name" placeholder="Habit name" />
             <label for="hab_desc">Describe your habit:</label>
-            <input type="text" id="hab_desc" placeholder="Habit description" />
+            <input type="text" id="hab_desc" name="descriptiion" placeholder="Habit description" />
 
             <!-- ================== radio section ========================= --> 
-<div class="frequencies">
+            <div class="frequencies">
             <label for="frequency">Frequency:</label>
             <input
               name="frequency"
@@ -80,7 +81,7 @@
 
             <!-- form dropdown day/week/Month -->
             <label for="daily/weekly/month">times per:</label>
-            <select name="timing" id="timing">
+            <select name="day_month" id="timing">
               <option value="day">day</option>
               <option value="week">week</option>
               <option value="month">month</option>
@@ -89,7 +90,7 @@
 
           <div class="colour">
             <label for="green/purple/blue">Choose one colour:</label>
-            <select name="timing" id="colours">
+            <select name="colour" id="colours">
               <option value="green">green</option>
               <option value="purple">purple</option>
               <option value="blue">blue</option>
@@ -99,13 +100,14 @@
             <!-- Modal Footer-->
 
             <div class="modal-footer"></div>
-            <button type="button" class="btn btn-primary">
-              Add this habit
+            <button type="submit" class="btn btn-primary" >
+              Add habit
             </button>
             <button type="button" class="btn btn-close btn-danger" data-dismiss="modal">
               Close
             </button>
           </div>
+          </form>
         </div>
       </div>
     </div>
