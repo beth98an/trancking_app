@@ -82,6 +82,8 @@ function tryThis(habits) {
 //should this be async?
 function showTracking(habits) {
     habits.forEach(habit => {
+    const main = document.getElementById('listHabits')
+    main.innerHTML = ''
 
     const ahabit = document.createElement('div')
     ahabit.setAttribute('class', 'habitContainer');
@@ -129,7 +131,7 @@ function showTracking(habits) {
     ahabit.appendChild(currentCount)
     ahabit.appendChild(showChartButton) 
 
-    const main = document.getElementById('listHabits')
+    
 /*     main.appendChild(ahabit) */
     console.log('habitlisted')
     
