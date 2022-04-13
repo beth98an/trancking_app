@@ -66,17 +66,23 @@ async function loadHabit(username){
 
 // fetching all posts for this user
 // put in main?
+
 fetch(`http://localhost:${port}/habits`)
 .then(resp => resp.json())
-.then(resp => {
-    resp.forEach(habit => {
-        showCurrentlyTracking(habit)
-    });
-    
-})
+.then(resp => showTracking(resp))
+
+function tryThis(habits) {
+    habits.forEach(habit => { 
+        console.log(habit)
+    })
+}
+
+
 
 //should this be async?
-function showCurrentlyTracking(habit) {
+function showTracking(habits) {
+    habits.forEach(habit => {
+
     const ahabit = document.createElement('div')
     ahabit.setAttribute('class', 'habitContainer');
     
@@ -90,7 +96,7 @@ function showCurrentlyTracking(habit) {
     const updateButton = document.createElement('input')
     updateButton.setAttribute('type', 'submit')
     updateButton.setAttribute('value', 'update') 
-    updateButton.addEventListener('submit', habitUpdate(habit.habit_id)) 
+    /* updateButton.addEventListener('submit', habitUpdate(habit.habit_id))  */
     
     //add a lil something that shows how many times today already
     const currentCount = document.createElement('p')
@@ -123,6 +129,11 @@ function showCurrentlyTracking(habit) {
     ahabit.appendChild(currentCount)
     ahabit.appendChild(showChartButton) 
 
+    const main = document.getElementById('listHabits')
+/*     main.appendChild(ahabit) */
+    console.log('habitlisted')
+    
+    })
 }
 
 function openChartModal() {
