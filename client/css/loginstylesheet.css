@@ -6,11 +6,15 @@
 }
   
 body {
-  padding: 50px;
+  
   background-color: black;
+  height: 1200px;
+}
+#login{
+  margin-top: 5.5rem;
 }
 
-.header {
+/* .header {
   width: 100%;
   display: flex;
   justify-content: center;
@@ -19,16 +23,17 @@ body {
   padding: 10px;
   font-size: 50px;
   color: white;
-}
+} */
 
 fieldset {
-    width: 40%;
+    width: 30rem;
+    min-width: 10rem;
     margin: auto;
-    padding: 30px;
-    border: solid white 5px;
+    padding: 2rem 3rem 2rem 3rem;
+    border: solid #f3722c 5px;
     border-radius: 10px;
     min-width: 200px;
-    background-color: #f94144;
+    background-color: black;
     color: white;  
 }
   
@@ -36,7 +41,7 @@ legend {
     
   padding: 10px;
   font-size: 30px;
-  color: white;
+  color: #f3722c;
 
 }
 
@@ -90,14 +95,22 @@ input[type="text"] {
 }
 
   
-nav {
-
-  color: #ffff;
+.nav_bar {
+  width: 100%;
+  text-align: center;
+  color: white;
   font-size: 60px;
   font-weight: bold;
-  border-bottom: 1px solid #38444d;
-  text-align: center;
+  background-color: black;
+  position: fixed;
+  z-index: 999;
+  
+}
 
+.top-buttons{
+
+  display: flex;
+  justify-content: center;
 }
 
 
@@ -108,32 +121,51 @@ padding: 20px;
 }
 /* 
 .radio-class{
-
   display: flex;
   justify-content: space-around;
   flex-wrap: wrap;
   padding: 10px;
   border: 2px solid black;
   border-radius: 5px;
-
 } */
 
 #hab_name{
   margin-bottom: 5px;
 }
+
+/* .nav_bar{
+  position: fixed;
+} */
+
 .btn-section{
 
- padding-top: 30px;
- display: flex;
- justify-content: space-around;
+  padding-top: 30px;
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 4rem;
+  
+ 
+ }
+
+.btn-add{
+width: 12rem;
+height:6rem ;
+font-size: 3rem;
 
 }
- 
 
-.btn-danger{
+.btn-logout{
+width: 12rem;
+height: 6rem;
+font-size: 3rem;
+margin-top: 8px;
+margin-left: 3rem;
+}
+.btn-close  {
 width: 50%;
 font-size: 30px;
-margin-left: px;
+
+
 
 }
 
@@ -160,6 +192,7 @@ font-size: 28px;
  width: 50%;
  
 }
+
 
 
 #reg_email  {
@@ -189,10 +222,20 @@ box-sizing: border-box;
  } 
 
  #timing {
-   height: 35px;
+  height: 35px;
   border: 2px solid black;
   border-radius: 5px;
   box-sizing: border-box;
+ }
+
+ #colours{
+  height: 35px;
+  width: 30%;
+  border: 2px solid black;
+  border-radius: 5px;
+  box-sizing: border-box;
+
+
  }
 
  .colour{
@@ -203,4 +246,4 @@ justify-content: space-around;
 
  #green {
   background-color: green;
-}
+ }

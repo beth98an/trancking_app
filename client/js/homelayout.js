@@ -28,7 +28,7 @@ function closeModal() {
 
 //submit form in modal
 
-/* data we want to send = habitData.user_id, habitData.name, habitData.desription, habitData.frequency, habitData.color */
+/* data we want to send = habitData.name, habitData.desription, habitData.frequency, habitData.color */
 
 //amount of tracking - stretch
 
@@ -40,12 +40,10 @@ async function addNewHabit() {
     const formData = new FormData(addHabitForm)
     const formDataSerialised = Object.fromEntries(formData)
 
-    const jsonObject = {...formDataSerialised, user_id: user_id}
-
     try{
         const response = await fetch (`http://localhost:${port}/user/`, {
         method: 'POST', 
-        body: JSON.stringify(jsonObject),
+        body: JSON.stringify(formDataSerialised),
         headers: {
             'Content-Type': 'application/json'
         }
@@ -96,18 +94,30 @@ function showCurrentlyTracking(habit) {
     updateButton.setAttribute('type', 'submit')
     updateButton.setAttribute('value', 'update') 
     updateButton.addEventListener('submit', habitUpdate) 
-    //add a lil something that shows how many times today already
     
+    //add a lil something that shows how many times today already
     const currentCount = document.createElement('p')
     currentCount.setAttribute('class', 'currentCount')
-    currentCount.textContent = `${habit.count} times today`
+    currentCount.textContent = `${habit.count} times today` //habit.day_month.count?? where day_month === current
 
     const showChartButton = document.createElement('input')
-    showChartButton.setAttribute('type', 'submit')//could be type button
+    showChartButton.setAttribute('type', 'submit')
     showChartButton.setAttribute('value', 'Show tracking')
-    showChartButton.addEventListener('click', function() { 
-        showChart(habit)
-    });
+    showChartButton.addEventListener('click', openChartModal);
+
+    const habitChart = new Chart(`${habit.name}`, {
+        type: "bar",
+        data: {
+            labels: [habit.date, habit.date-1, habit.date-2, habit.date-3, habit.date-4, habit.date-5, habit.date-6]
+            datasets: [{
+            backgroundColor: habit.colour,
+            data: [habit.date.count, habit.date-1.count, habit.date-2.count...] //count per day];
+            }]
+        },
+        options: {...}
+        });
+    //create modal.display=none
+    //modal.appendChild habitChart
     
     ahabit.appendChild(habitName)
     ahabit.appendChild(habitDesc)
@@ -118,35 +128,19 @@ function showCurrentlyTracking(habit) {
 
 }
 
-
-function showChart(habit) {
-    var xValues = []//today's date - [-7]];
-    //could do a switch func for days of the week
-    var yValues = []//count per day];
-    var barColors = []//colour chosen];
-
-    const habitChart = new Chart(`${habit.name}`, {
-    type: "bar",
-    data: {
-        labels: xValues,
-        datasets: [{
-        backgroundColor: barColors,
-        data: yValues
-        }]
-    },
-    options: {...}
-    });
-
-    //modal
+function openChartModal() {
+    //modal display from none to block
 }
 
 
-function habitUpdate(user_id, habit, frequency){
+
+function habitUpdate(user_id, habit, count){
+    //access current count
     //habit.count+1
     /* for date enter count++ */
     fetch(`http://localhost:${port}/${user_id}/`, {
       method: 'PUT',
-      body: JSON.stringify({ habit: habit, frequency: frequency }),
+      body: JSON.stringify({ habit: habit, count: count }),
       headers: { 'Content-Type': 'application/json' },
     })
     location.reload();
