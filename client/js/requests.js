@@ -38,7 +38,19 @@ async function addNewHabit(e) {
     }
 }
 
-module.exports = {getAllPosts, getPost, post}
+
+function habitUpdate(user_id, habit, frequency){
+    //habit.count+1
+    /* for date enter count++ */
+    fetch(`http://localhost:${port}/count/`, {
+      method: 'PUT',
+      body: JSON.stringify({ habit: habit, frequency: frequency }),
+      headers: { 'Content-Type': 'application/json' },
+    })
+    location.reload();
+};
+
+
 
 
 //do we need crud functionality??
