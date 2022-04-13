@@ -17,24 +17,37 @@
       crossorigin="anonymous"
     />
     <link rel="stylesheet" href="css/loginstylesheet.css" />
-    <title>Document</title>
+    <title>Habitat</title>
   </head>
 
   <body>
-    <nav><span>Tracking Habits App</span></nav>
+    
+    </div>
+    <nav class="nav_bar">
+      <div class="btntoadd">
+       
 
-                    <label for="frequency" >Frequency:</label>
-                    <input name="frequency" type="number" id="frequency" class="form-control" placeholder="How many..">
-                    
-                    <!-- form dropdown day/week/Month -->
-                    <label for="daily/weekly/month">times per:</label>
-                    <select name="timing" id="timing">
-                        <option value="day">day</option>
-                        <option value="week">week</option>
-                        <option value="month">month</option>
-                      </select>
-                    <!-- choose a colour -->
+      <div>Tracking Habits App</div>
+    
+      <section class="top-buttons">
 
+        <button
+        type="button"
+        class="btn btn-add btn-success btn-lg mt-2 ml-2"
+        data-toggle="modal"
+        data-target="#meuModal"
+      >
+      Add
+      </button>
+  
+      <button type="button" class="btn btn-logout btn-danger" data-dismiss="modal">
+        Logout
+      </button>
+      </section>
+    </nav>
+   
+
+    
 
                     <input type="submit" value="submit" id="sbutton" class="btn btn-success mx-1">
                     <input type="submit" value="close" id="closeBtn" class="btn btn-danger mx-1">
@@ -79,8 +92,8 @@
 
           <div class="colour">
             <label for="green/purple/blue">Choose one colour:</label>
-            <select name="timing" id="timing">
-              <option value="green" id="green">green</option>
+            <select name="timing" id="colours">
+              <option value="green">green</option>
               <option value="purple">purple</option>
               <option value="blue">blue</option>
             </select>
@@ -92,7 +105,7 @@
             <button type="button" class="btn btn-primary">
               Add this habit
             </button>
-            <button type="button" class="btn btn-danger" data-dismiss="modal">
+            <button type="button" class="btn btn-close btn-danger" data-dismiss="modal">
               Close
             </button>
           </div>

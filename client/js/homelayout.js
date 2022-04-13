@@ -43,7 +43,7 @@ async function addNewHabit() {
     const jsonObject = {...formDataSerialised, user_id: user_id}
 
     try{
-        const response = await fetch (`http://localhost:${port}/`, {
+        const response = await fetch (`http://localhost:${port}/user/`, {
         method: 'POST', 
         body: JSON.stringify(jsonObject),
         headers: {
