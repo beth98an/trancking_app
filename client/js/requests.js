@@ -51,8 +51,7 @@ function habitUpdate(habit_id){
     location.reload();
 };
 
-
-
+module.exports = {getAllHabits, getHabit, addNewHabit}
 
 
 //do we need crud functionality??
