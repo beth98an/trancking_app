@@ -24,14 +24,12 @@
     "url": "https://github.com/aPatient97/trancking_app/issues"
   },
   "homepage": "https://github.com/aPatient97/trancking_app#readme",
-  "devDependencies": {
-    "jest": "^26.4.2",
-    "supertest": "^4.0.2",
-    "nodemon": "^2.0.15"
-  },
   "dependencies": {
+    "bcrypt": "^5.0.1",
+    "bcryptjs": "^2.4.3",
     "cors": "^2.8.5",
     "express": "^4.17.3",
+    "nodemon": "^2.0.15",
     "pg": "^8.3.3"
   }
 }

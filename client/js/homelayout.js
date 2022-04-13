@@ -1,16 +1,12 @@
-//need prevent default/empty form data submit etc
 
-const { Http2ServerRequest } = require('http2');
-const {getAllHabits, getHabit, addNewHabit} = require('./requests');
-
-let port
-let user_id
-//is this where we do window hash endpoint per userID
-//let user_id = window.location.hash.substring(1);
+let port = 3000
+let username = window.location.hash.substring(1);
+//require auth currentuser()
 //HOW TO Define USERID and redirect to there
 
+
 //modal open and close
-const newHabitButton = document.getElementById('newHabitButton')
+/* const newHabitButton = document.getElementById('newHabitButton')
 newHabitButton.addEventListener('click', openModal)
 
 const newHabitModal = document.getElementById('newHabitModal')
@@ -25,29 +21,26 @@ function openModal() {
 function closeModal() {
     newHabitModal.display = 'none';
 }
-
+ */
 
 
 //submit form in modal
-
-/* data we want to send = habitData.user_id, habitData.name, habitData.desription, habitData.frequency, habitData.color */
-
-//amount of tracking - stretch
-
-const addHabitForm = getElementById('addHabitForm');
-addHabitForm.addEventListener('submit', addNewHabit);
+const addHabitForm = document.getElementById('addHabitForm');
+addHabitForm.addEventListener('submit', addHabit);
 
 
-async function addNewHabit() {
+async function addHabit(e) {
+    e.preventDefault();
     const formData = new FormData(addHabitForm)
     const formDataSerialised = Object.fromEntries(formData)
+    console.log(formDataSerialised)
 
-    const jsonObject = {...formDataSerialised, user_id: user_id}
+    addNewHabit(formDataSerialised)
 
-    try{
-        const response = await fetch (`http://localhost:${port}/`, {
+/*     try{
+        const response = await fetch (`http://localhost:${port}/user/`, {
         method: 'POST', 
-        body: JSON.stringify(jsonObject),
+        body: JSON.stringify(formDataSerialised),
         headers: {
             'Content-Type': 'application/json'
         }
@@ -57,7 +50,7 @@ async function addNewHabit() {
     }catch(e){
         console.error(e);
         alert('There was an error')
-    }
+    } */
 }
 
 
@@ -66,24 +59,25 @@ async function addNewHabit() {
 //load container below
 
 /* ???
-async function loadHabit(user_id){
-    const data = await getAllHabits(user_id);
+async function loadHabit(username){
+    const data = await getAllHabits(username;
     data.forEach(habit => renderCard(habit));
 } */
 
 // fetching all posts for this user
-fetch(`http://localhost:${port}/`)
+// put in main?
+
+fetch(`http://localhost:${port}/habits`)
 .then(resp => resp.json())
-.then(resp => {
-    //console.log(resp) - use this to test resp and endpoints
-    resp.forEach(habit => {
-        showCurrentlyTracking(habit)
-    });
-    
-})
+/* .then(resp => console.log(resp)) */
+.then(resp => showTracking(resp))
+
 
 //should this be async?
-function showCurrentlyTracking(habit) {
+function showTracking(habits) {
+    habits.forEach(habit => {
+    const main = document.querySelector('main')
+
     const ahabit = document.createElement('div')
     ahabit.setAttribute('class', 'habitContainer');
     
@@ -92,66 +86,58 @@ function showCurrentlyTracking(habit) {
     const habitDesc = document.createElement('p')
     habitName.textContent = habit.description
     const habitFrequency = document.createElement('p')
-    habitFrequency.textContent = habit.frequency
+    habitFrequency.textContent = `${habit.frequency} times per ${habit.day_month}`
     
     const updateButton = document.createElement('input')
     updateButton.setAttribute('type', 'submit')
-    updateButton.setAttribute('value', 'done') // or update
-    updateButton.addEventListener('submit', habitUpdate) 
+    updateButton.setAttribute('value', 'update') 
+    /* updateButton.addEventListener('submit', habitUpdate(habit.habit_id))  */
+    
     //add a lil something that shows how many times today already
+    const currentCount = document.createElement('p')
+    currentCount.setAttribute('class', 'currentCount')
+    currentCount.textContent = `${habit.count} times today` //habit.day_month.count?? where day_month === current
 
+    const showChartButton = document.createElement('input')
+    showChartButton.setAttribute('type', 'submit')
+    showChartButton.setAttribute('value', 'Show tracking')
+    showChartButton.addEventListener('click', openChartModal);
 
-    addChart(habit)
-
+    /* const habitChart = new Chart(`${habit.name}`, {
+        type: "bar",
+        data: {
+            labels: [habit.date, habit.date-1, habit.date-2, habit.date-3, habit.date-4, habit.date-5, habit.date-6]
+            datasets: [{
+            backgroundColor: habit.colour,
+            data: [habit.date.count, habit.date-1.] //count per day];
+            }]
+        },
+        options: {...}
+        }); */
+    //create modal.display=none
+    //modal.appendChild habitChart
+    
     ahabit.appendChild(habitName)
     ahabit.appendChild(habitDesc)
     ahabit.appendChild(habitFrequency)
     ahabit.appendChild(updateButton)  
-    //see tracking  
+    ahabit.appendChild(currentCount)
+    ahabit.appendChild(showChartButton) 
 
-    //open modal of a graph - if statement for custom day/every mon/tues/sat etc know if ahead or behind goals?
-    //if daily look at week by bar chart - FOCUS HERE
-    // if weekly look at week and month by bar or line
-    // if monthly look at month/year by bar or line
     
-    //MULTPLE line graph for ALL HABITS
-}
-
-
-function showChart(habit) {
-    var xValues = []//today's date - [-7]];
-    //could do a switch func for days of the week
-    var yValues = []//count per day];
-    var barColors = []//colour chosen];
-
-    new Chart(`${habit.name}`, {
-    type: "bar",
-    data: {
-        labels: xValues,
-        datasets: [{
-        backgroundColor: barColors,
-        data: yValues
-        }]
-    },
-    options: {...}
-    });
-}
-
-
-
-//check box - did you do this today? sends form data of current time to backend
-
-
-function habitUpdate(user_id, habit, frequency){
+    main.appendChild(ahabit)
+    console.log('habitlisted')
     
-    /* for date enter count++ */
-    fetch(`http://localhost:${port}/${user_id}/`, {
-      method: 'PUT',
-      body: JSON.stringify({ habit: habit, frequency: frequency }),
-      headers: { 'Content-Type': 'application/json' },
     })
-    location.reload();
-};
+}
+
+function openChartModal() {
+    //modal display from none to block
+}
+
+
+
+
 
 
 

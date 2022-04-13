@@ -4,39 +4,117 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/png" href="./images/favicon2.png">
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
       href="https://fonts.googleapis.com/css2?family=Licorice&family=Ubuntu+Mono&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="/css/loginstylesheet.css" />
-    <title>Document</title>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
+      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="css/loginstylesheet.css" />
+    <title>Habitat</title>
+    <script defer src="./js/auth.js"></script>
   </head>
 
   <body>
-    <section class="header">
+    <!-- <section class="header">
       <h1>Welcome to Our App</h1>
-    </section>
+    </section> -->
 
     <section class="myForm">
-      <form action="">
+      <form action="" class="login" id="login">
         <fieldset>
           <legend><h1>Login:</h1></legend>
-          <label for="name">Name:</label>
-          <input type="text" id="name" />
+          <label for="username">Username:</label>
+          <input type="text" name="username" id="username" />
+          
           <label for="password">Password:</label>
-          <input type="text" name="" id="password" />
+          <input type="password" name="password" id="password" />
 
-          <input
+          <div class="btn-section">
+              
+                <button type="submit" class="btn btn-login btn-primary">Login</button>
+
+
+                <button
+                type="button"
+                class="btn btn-success btn-register btn-lg mt-2 ml-2"
+                data-toggle="modal"
+                data-target="#meuModal"
+              >
+                Register
+              </button>
+            </div>
+          
+          <!-- <input
             type="submit"
             name="Send"
             value="Login"
             id=""
             class="login-btn"
-          />
+          /> -->
         </fieldset>
       </form>
     </section>
+
+    <!-- Modal Register -->
+
+    <!-- Modal -->
+    <form action="" class="register" id="register">
+    <div id="meuModal" class="modal change-modal fade" role="dialog">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          
+          <h1 class="modal_title">Register:</h1>
+
+          <!-- Modal Body -->
+          <div class="modal-body">
+        <!-- Modal Content -->
+            <label for="reg_name">Name:</label>
+            <input type="text" name="username" id="reg_name" />
+            <label for="reg_email">Email:</label>
+            <input type="email" name="email" id="reg_email" />
+            <label for="reg_password">Password:</label>
+            <input type="password" name="password" id="reg_password" />
+
+          </div>
+
+          <!-- Modal Footer-->
+          <div class="modal-footer">
+            <!-- <button type="button" class="btn btn-danger" data-dismiss="modal">
+              Close
+            </button> -->
+            <button type="submit" class="btn btn-primary">
+              Register 
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    </form>
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script
+      src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+      integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+      integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+      integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+      crossorigin="anonymous"
+    ></script>
   </body>
 </html>
