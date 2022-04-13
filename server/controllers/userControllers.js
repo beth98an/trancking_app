@@ -28,7 +28,7 @@ async function create(req, res) {
         let user = await User.create({...req.body, password: hashed})
         res.status(201).json({user})
     } catch (err) {
-        res.status(500).json({err: 'User cannot be created'})
+        res.status(422).json({err: 'User cannot be created'})
     }
 }
 

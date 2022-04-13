@@ -19,7 +19,7 @@ describe('getHabit', ()=>{
 
 describe('newHabit', ()=>{
     test('newHabit exists', ()=>{
-        let newHabit = requests.newHabit
+        let newHabit = requests.addNewHabit
         expect(newHabit).toBeTruthy()
     })
 })
