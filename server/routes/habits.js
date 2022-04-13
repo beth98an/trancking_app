@@ -8,5 +8,7 @@ router.get('/:id', habitControllers.show)
 router.get('/find/:username', habitControllers.showHabits)
 router.post('/:username', habitControllers.create)
 router.delete('/:id', habitControllers.destroy)
+router.put('/count', habitControllers.count)
+router.get('/getcount/:id', habitControllers.getCount)
 
 module.exports = router
