@@ -69,21 +69,14 @@ async function loadHabit(username){
 
 fetch(`http://localhost:${port}/habits`)
 .then(resp => resp.json())
+/* .then(resp => console.log(resp)) */
 .then(resp => showTracking(resp))
-
-function tryThis(habits) {
-    habits.forEach(habit => { 
-        console.log(habit)
-    })
-}
-
 
 
 //should this be async?
 function showTracking(habits) {
     habits.forEach(habit => {
-    const main = document.getElementById('listHabits')
-    main.innerHTML = ''
+    const main = document.querySelector('main')
 
     const ahabit = document.createElement('div')
     ahabit.setAttribute('class', 'habitContainer');
@@ -132,7 +125,7 @@ function showTracking(habits) {
     ahabit.appendChild(showChartButton) 
 
     
-/*     main.appendChild(ahabit) */
+    main.appendChild(ahabit)
     console.log('habitlisted')
     
     })
