@@ -76,7 +76,7 @@ class Habit {
     static async count(habitData) {
         return new Promise (async (resolve, reject) => {
             try {
-                await db.query(`INSERT INTO completed_habits (habit_id) VALUES ($1);`, [habitData.habit_id])
+                await db.query(`INSERT INTO completed_habits (habit_id) VALUES ($1);`, [habitData])
                 resolve('Habbit updated.')
             } catch (err) {
                 reject('Habit not updated.')
@@ -87,9 +87,9 @@ class Habit {
     static async getCount(habit_id) {
         return new Promise (async (resolve, reject) => {
             try {
-               const result = await db.query(`SELECT COUNT(date_completed) FROM completed_habits WHERE habit_id = $1 GROUP BY DATE_TRUNC('month', date_completed);`, [habit_id] )
+               const result = await db.query(`SELECT COUNT(date_completed), DATE_TRUNC('month', date_completed) FROM completed_habits WHERE habit_id = $1 GROUP BY DATE_TRUNC('month', date_completed);`, [habit_id] )
                console.log(result)
-               resolve(result)
+               resolve(result.rows)
             } catch (err) {
                 reject(`Couldn't get count`)
             }
