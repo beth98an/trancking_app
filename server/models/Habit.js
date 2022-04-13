@@ -1,4 +1,5 @@
-const db = require('../dbLink');
+const db = require('../dbLink')
+const User = require('./User')
 
 class Habit {
     constructor(data){
@@ -27,7 +28,7 @@ class Habit {
     static async create(habitData) {
         return new Promise (async (resolve, reject) => {
             try {
-                let habits = await db.query(`INSERT INTO habits (user_id, name, question, frequency, color) VALUES ($1, $2, $3, $4, $5) RETURNING *;`,[habitData.user_id, habitData.name, habitData.description, habitData.frequency, habitData.color])
+                let habits = await db.query(`INSERT INTO habits (user_id, name, description, frequency, color) VALUES ($1, $2, $3, $4, $5) RETURNING *;`,[habitData.user_id, habitData.name, habitData.description, habitData.frequency, habitData.color])
                 let habit = new Habit(habits.rows[0])
                 resolve(habit)
             } catch (err) {
@@ -47,6 +48,18 @@ class Habit {
                 }
             }  
         )
+    }
+
+    static async showHabits(username) {
+        return new Promise (async (resolve, reject) => {
+            try {
+                let habitData = await db.query(`SELECT habits.* FROM habits INNER JOIN users ON users.user_id = habits.user_id WHERE users.username = $1;`, [username])
+                let habits = habitData.rows
+                resolve(habits)
+            } catch (err) {
+                reject('Habbits by user not found.')
+            }
+        })
     }
   
     destroy() {
