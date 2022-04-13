@@ -92,4 +92,35 @@
     4. `npm i bcrypt`
     
     When a user registers we’re going to need to generate a unique version of the password and also compare the plain text password to the encrypted version in the database. 
+
+
+
+
+
+
+
+
+
+ /*   //require auth currentuser()
+//HOW TO Define USERID and redirect to there
+
+
+//modal open and close
+/* const newHabitButton = document.getElementById('newHabitButton')
+newHabitButton.addEventListener('click', openModal)
+
+const newHabitModal = document.getElementById('newHabitModal')
+
+const closeBtn = document.getElementById('closeBtn')
+closeBtn.addEventListener('click', closeModal);
+
+function openModal() {
+    newHabitModal.style.display = 'block';
+}
+
+function closeModal() {
+    newHabitModal.display = 'none';
+}
+ */
+
     

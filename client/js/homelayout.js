@@ -1,27 +1,5 @@
-
 let port = 3000
-let username = window.location.hash.substring(1);
-//require auth currentuser()
-//HOW TO Define USERID and redirect to there
-
-
-//modal open and close
-/* const newHabitButton = document.getElementById('newHabitButton')
-newHabitButton.addEventListener('click', openModal)
-
-const newHabitModal = document.getElementById('newHabitModal')
-
-const closeBtn = document.getElementById('closeBtn')
-closeBtn.addEventListener('click', closeModal);
-
-function openModal() {
-    newHabitModal.style.display = 'block';
-}
-
-function closeModal() {
-    newHabitModal.display = 'none';
-}
- */
+let username = localStorage.getItem('username')
 
 
 //submit form in modal
@@ -35,10 +13,10 @@ async function addHabit(e) {
     const formDataSerialised = Object.fromEntries(formData)
     console.log(formDataSerialised)
 
-    addNewHabit(formDataSerialised)
+    /* addNewHabit(formDataSerialised) */
 
-/*     try{
-        const response = await fetch (`http://localhost:${port}/user/`, {
+    try{
+        const response = await fetch (`http://localhost:${port}/habits/${username}`, {
         method: 'POST', 
         body: JSON.stringify(formDataSerialised),
         headers: {
@@ -50,7 +28,7 @@ async function addHabit(e) {
     }catch(e){
         console.error(e);
         alert('There was an error')
-    } */
+    }
 }
 
 
@@ -58,16 +36,7 @@ async function addHabit(e) {
 
 //load container below
 
-/* ???
-async function loadHabit(username){
-    const data = await getAllHabits(username;
-    data.forEach(habit => renderCard(habit));
-} */
-
-// fetching all posts for this user
-// put in main?
-
-fetch(`http://localhost:${port}/habits`)
+fetch(`http://localhost:${port}/habits/find/${username}`) //change endpoint
 .then(resp => resp.json())
 /* .then(resp => console.log(resp)) */
 .then(resp => showTracking(resp))
