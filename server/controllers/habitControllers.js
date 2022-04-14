@@ -1,4 +1,4 @@
-const { json } = require('express')
+
 const Habit = require('../models/Habit')
 
 async function index(req, res) {

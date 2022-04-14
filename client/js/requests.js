@@ -2,7 +2,7 @@ let username = localStorage.getItem('username')
 
 
 // function to retrieve all
-async function getAllHabits() {
+async function getAllHabits(username) {
     try {
         const resp = await fetch(`http://localhost:3000/${username}/`);
         const data = await resp.json()
@@ -13,7 +13,7 @@ async function getAllHabits() {
 };
 
 // function to retrieve a single habit post by its ID
-async function getHabit(id) {
+async function getHabit(username) {
     try {
         const resp = await fetch(`http://localhost:3000/habits/${username}`);
         const data = await resp.json();
@@ -55,9 +55,8 @@ function habitUpdate(habit_id){
 };
 
 
+module.exports = {getAllHabits, getHabit, addNewHabit, habitUpdate}
 
-
-module.exports = {getAllHabits, getHabit, addNewHabit}
 
 
 

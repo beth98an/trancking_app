@@ -3,7 +3,7 @@
 */
 const fs = require('fs');
 const path = require('path');
-const html = fs.readFileSync(path.resolve(__dirname,  '../redirect.html'),  'utf-8');
+const html = fs.readFileSync(path.resolve(__dirname,  '../userHome.html'),  'utf-8');
 
 describe('login.html', () => {
     beforeEach(() => {

@@ -1,5 +1,5 @@
-const loginForm = document.getElementById("login")
-loginForm.addEventListener('submit', requestLogin)
+// const loginForm = document.getElementById("login")
+// loginForm.addEventListener('submit', requestLogin)
 
 
 async function requestLogin(e){
@@ -45,8 +45,8 @@ function currentUser(){
 
 
 
-const registerForm = document.getElementById("register")
-registerForm.addEventListener('submit', registerUser)
+// const registerForm = document.getElementById("register")
+// registerForm.addEventListener('submit', registerUser)
 
 async function registerUser(e){
     e.preventDefault();
@@ -72,3 +72,4 @@ async function registerUser(e){
     }
 }
 
+module.exports = {registerUser, requestLogin, login, currentUser}

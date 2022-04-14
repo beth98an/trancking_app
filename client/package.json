@@ -1,6 +1,7 @@
 {
   "devDependencies": {
     "jest": "^27.5.1",
+    "jest-fetch-mock": "^3.0.3",
     "supertest": "^6.2.2"
   },
   "name": "client",
