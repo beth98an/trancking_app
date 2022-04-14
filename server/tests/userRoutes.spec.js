@@ -64,7 +64,7 @@ describe ('user endpoints', () => {
             password: 'password2'
         })
         expect(res.statusCode).toEqual(200)
-        expect(res.body.user).toEqual('user2')
+        expect(res.body.username).toEqual('user2')
     })
     it('should not login a user if username does not exist', async()=>{
         const res = await request(api).post('/users/login/')

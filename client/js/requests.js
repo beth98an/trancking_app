@@ -44,8 +44,8 @@ async function addNewHabit(data) {
 
 
 function habitUpdate(habit_id){
-    const currentCount = habit.habit_id.day_month.count //where day_Month == today
-    const newcount = currentCount++
+    const currentCount = habit.id.day_month.count //where day_Month == today
+    const newcount = currenCount++
     fetch(`http://localhost:${port}/${username}/`, {
       method: 'PUT',
       body: JSON.stringify({count: newcount }),
