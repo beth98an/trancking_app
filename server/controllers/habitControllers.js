@@ -40,15 +40,41 @@ async function create(req, res) {
 
 async function destroy(req, res) {
     try {
-        const habit = await Habit.show(req.params.id);
-        await habit.destroy();
-        res.status(204).end();
+        const habit = await Habit.show(req.params.id)
+        await habit.destroy()
+        res.status(204).end()
     } catch (err) {
-        res.status(404).json({err});
-    };
+        res.status(404).json({err: 'Habit not terminated'})
+    }
 }
 
-module.exports = { index, show, create, destroy, showHabits }
+async function count(req, res) {
+    try {
+        console.log(req.params)
+        console.log(req.params.id)
+        const completed = await Habit.count(req.params.id)
+
+        res.status(201).json(completed)
+    } catch (err) {
+        res.status(422).json({err: 'Count failed.'})
+    }
+}
+
+async function getCount(req, res) {
+    try {
+        const counted = await Habit.getCount(req.params.id)
+        res.status(200).json(counted)
+    } catch (err) {
+        res.status(404).json({err})
+    }
+}
+
+
+
+
+
+
+module.exports = { index, show, create, destroy, showHabits, count, getCount}
 
 
 

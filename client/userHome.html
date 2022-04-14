@@ -48,7 +48,7 @@
 
       <spam>Habitat App</spam>
   
-      <button type="button" class="btn btn-logout btn-danger" data-dismiss="modal">
+      <button type="button" id='logout' class="btn btn-logout btn-danger" data-dismiss="modal">
         Logout
       </button>
 <!-- 
@@ -60,7 +60,9 @@
     <div class="spacer"></div>
   
     
+
   <main id="'listHabits"> </main>
+
 
     <!-- Modal -->
     <div id="meuModal" class="modal change-modal fade" role="dialog">
@@ -75,7 +77,7 @@
             <label for="name">Name your habit:</label>
             <input type="text" name="name" id="hab_name" placeholder="Habit name" />
             <label for="hab_desc">Describe your habit:</label>
-            <input type="text" id="hab_desc" name="descriptiion" placeholder="Habit description" />
+            <input type="text" id="hab_desc" name="description" placeholder="Habit description" />
 
             <!-- ================== radio section ========================= --> 
             <div class="frequencies">
@@ -99,7 +101,7 @@
 
           <div class="colour">
             <label for="green/purple/blue">Choose one colour:</label>
-            <select name="colour" id="colours">
+            <select name="color" id="colours">
               <option value="green">green</option>
               <option value="purple">purple</option>
               <option value="blue">blue</option>
