@@ -78,4 +78,15 @@ describe ('habit endpoints', () => {
         expect(res.statusCode).toEqual(404)
         expect(res.body).toHaveProperty('err')
     })
+
+    it('should create a new completed habit', async() => {
+        const res = await request(api).put('/habits/count/1')
+        expect(res.statusCode).toEqual(201)
+        expect(res.body).toEqual('Habit updated.')
+    })
+    
+    it('should return habit count found by habit_id', async() => {
+        const res = await request(api).get('/habits/getcount/1')
+        expect(res.statusCode).toEqual(200)
+    })
 })

@@ -77,7 +77,7 @@ class Habit {
         return new Promise (async (resolve, reject) => {
             try {
                 await db.query(`INSERT INTO completed_habits (habit_id) VALUES ($1);`, [habitData])
-                resolve('Habbit updated.')
+                resolve('Habit updated.')
             } catch (err) {
                 reject('Habit not updated.')
             }
