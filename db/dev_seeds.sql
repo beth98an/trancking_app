@@ -12,3 +12,14 @@ VALUES
 (2, 'Walk', 'Have you walk today?', 3, 'week', 'yellow', '2022-04-08'),
 (2, 'Cycle', 'Have you cycle today?', 3, 'week', 'yellow', '2022-04-08'),
 (2, 'sleep', 'Have you sleep today?', 3, 'week', 'yellow', '2022-04-08');
+
+
+INSERT INTO completed_habits (habit_id, date_completed)
+VALUES
+(4, '2022-05-08'),
+(4, '2022-06-08'),
+(4, '2022-06-08'),
+(4, '2022-06-08'),
+(4, '2022-05-08'),
+(4, '2022-05-08'),
+(4, '2022-05-08');
