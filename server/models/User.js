@@ -46,8 +46,6 @@ class User {
         })
     }
 
-
-
     destroy() {
         return new Promise (async (resolve, reject) => {
             try {
