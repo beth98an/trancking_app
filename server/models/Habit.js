@@ -87,7 +87,7 @@ class Habit {
     static async getCount(habit_id) {
         return new Promise (async (resolve, reject) => {
             try {
-               const result = await db.query(`SELECT COUNT(date_completed), DATE_TRUNC('month', date_completed) FROM completed_habits WHERE habit_id = $1 GROUP BY DATE_TRUNC('month', date_completed);`, [habit_id] )
+               const result = await db.query(`SELECT COUNT(date_completed), DATE_TRUNC('day', date_completed) FROM completed_habits WHERE habit_id = $1 GROUP BY DATE_TRUNC('day', date_completed);`, [habit_id] )
                console.log(result)
                resolve(result.rows)
             } catch (err) {
