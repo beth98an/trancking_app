@@ -40,6 +40,9 @@ async function addNewHabit(data) {
     }
 }
 
+
+
+
 function habitUpdate(habit_id){
     const currentCount = habit.habit_id.day_month.count //where day_Month == today
     const newcount = currentCount++
@@ -51,7 +54,11 @@ function habitUpdate(habit_id){
     location.reload();
 };
 
+
+
+
 module.exports = {getAllHabits, getHabit, addNewHabit}
+
 
 
 //do we need crud functionality??

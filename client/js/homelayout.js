@@ -1,6 +1,17 @@
 let port = 3000
 let username = localStorage.getItem('username')
 
+fetch(`http://localhost:${port}/users/${username}`) //change 
+.then(resp => resp.json())
+.then(resp => setuserid(resp))
+
+function setuserid(resp) {
+    user_id = resp.user_id
+    localStorage.setItem('user_id', resp.user_id);
+}
+
+let user_id = localStorage.getItem('user_id')
+console.log(user_id)
 
 //submit form in modal
 const addHabitForm = document.getElementById('addHabitForm');
@@ -11,24 +22,25 @@ async function addHabit(e) {
     e.preventDefault();
     const formData = new FormData(addHabitForm)
     const formDataSerialised = Object.fromEntries(formData)
-    console.log(formDataSerialised)
-
-    /* addNewHabit(formDataSerialised) */
+    const jsonObject = {...formDataSerialised, user_id: user_id}
+    console.log(jsonObject)
 
     try{
         const response = await fetch (`http://localhost:${port}/habits/${username}`, {
         method: 'POST', 
-        body: JSON.stringify(formDataSerialised),
+        body: JSON.stringify(jsonObject),
         headers: {
             'Content-Type': 'application/json'
         }
         })
         const json = await response.json();
         console.log(json)
+        window.location.reload()
     }catch(e){
         console.error(e);
         alert('There was an error')
     }
+
 }
 
 
@@ -64,7 +76,9 @@ function showTracking(habits) {
     updateButton.setAttribute('class', 'btn_update');
     updateButton.setAttribute('type', 'submit')
     updateButton.setAttribute('value', 'update') 
-    /* updateButton.addEventListener('submit', habitUpdate(habit.habit_id))  */
+    updateButton.addEventListener('submit', function(){
+        habitUpdate(habit.habit_id)
+    }) 
     
     //add a lil something that shows how many times today already
     const currentCount = document.createElement('p')
@@ -121,11 +135,10 @@ function closeChartModal() {
 
 
 function habitUpdate(habit_id){
-    const currentCount = habit.habit_id.day_month.count //where day_Month == today
-    const newcount = currentCount++
+    
     fetch(`http://localhost:${port}/${username}/`, {
       method: 'PUT',
-      body: JSON.stringify({count: newcount }),
+      body: JSON.stringify({habit_id: habit_id}),
       headers: { 'Content-Type': 'application/json' },
     })
     location.reload();

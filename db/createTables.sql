@@ -24,11 +24,8 @@ CREATE TABLE habits (
 DROP TABLE IF EXISTS completed_habits;
 
 CREATE TABLE completed_habits (
-    id SERIAL PRIMARY KEY,
     habit_id INT,
-    user_id INT,
-    dateCompleted DATE DEFAULT CURRENT_DATE, 
-    count INT
+    date_completed DATE DEFAULT CURRENT_DATE
 );
 
 
