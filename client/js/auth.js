@@ -72,4 +72,3 @@ async function registerUser(e){
     }
 }
 
-module.exports = {registerUser, requestLogin, login, currentUser}

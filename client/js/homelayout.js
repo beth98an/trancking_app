@@ -142,7 +142,7 @@ function openChartModal(habit_id, habit_colour) {
         weekData = (array.slice([startInd]));
         console.log(weekData)    
 
-        xAxes = weekData.map(day => day.date_trunc)
+        xAxes = weekData.map(day => day.date_trunc.slice(0, 10))
         console.log(xAxes)
         yValues = weekData.map(day => day.count)
         console.log(yValues)
