@@ -11,7 +11,6 @@ function setuserid(resp) {
 }
 
 let user_id = localStorage.getItem('user_id')
-console.log(user_id)
 
 //submit form in modal
 const addHabitForm = document.getElementById('addHabitForm');
@@ -76,7 +75,7 @@ function showTracking(habits) {
     updateButton.setAttribute('class', 'btn_update');
     updateButton.setAttribute('type', 'submit')
     updateButton.setAttribute('value', 'update') 
-    updateButton.addEventListener('submit', function(){
+    updateButton.addEventListener('click', function(){
         habitUpdate(habit.habit_id)
     }) 
     
@@ -135,13 +134,15 @@ function closeChartModal() {
 
 
 function habitUpdate(habit_id){
+    console.log(habit_id)
     
-    fetch(`http://localhost:${port}/${username}/`, {
-      method: 'PUT',
+    fetch(`http://localhost:${port}/habits/count/${habit_id}`, {
+      method: 'POST',
       body: JSON.stringify({habit_id: habit_id}),
       headers: { 'Content-Type': 'application/json' },
     })
-    location.reload();
+    /* location.reload(); */
+    console.log('++')
 };
 
 
