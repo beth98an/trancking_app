@@ -1,6 +1,7 @@
 /**
  * @jest-environment jsdom
 */
+const { test } = require('@jest/globals')
 const requests = require('../js/requests')
 
 jest.mock('../js/requests')
@@ -8,8 +9,8 @@ jest.mock('../js/requests')
 global.fetch = require('jest-fetch-mock')
 
 describe('getAllHabits', ()=>{
-    test('getAllHabits exists', async()=>{
-        let allHabits = await requests.getAllHabits
+    test('getAllHabits exists', ()=>{
+        let allHabits = requests.getAllHabits
         expect(allHabits).toBeTruthy()
     })
 })

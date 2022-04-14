@@ -31,9 +31,12 @@ describe ('habit endpoints', () => {
         expect(res.statusCode).toEqual(404)
         expect(res.body).toHaveProperty('err')
     })
-
+    it('should return habit found by user', async() => {
+        const res = await request(api).get('/habits/find/user1')
+        expect(res.statusCode).toEqual(200)
+    })
     it('should create a new habit', async() => {
-        const res = await request(api).post('/habits')
+        const res = await request(api).post('/habits/user1')
         .send({
             user_id: 2,
             name: 'newHabit',
@@ -49,7 +52,7 @@ describe ('habit endpoints', () => {
         expect(habitres.body.length).toEqual(5)
     })
     it('should not create a new habit if name exceeds 20 characters', async() => {
-        const res = await request(api).post('/habits')
+        const res = await request(api).post('/habits/user1')
         .send({
             user_id: 2,
             name: 'newHabitIsToBeCreated',
