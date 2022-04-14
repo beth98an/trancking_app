@@ -11,7 +11,6 @@ function setuserid(resp) {
 }
 
 let user_id = localStorage.getItem('user_id')
-console.log(user_id)
 
 //submit form in modal
 const addHabitForm = document.getElementById('addHabitForm');
@@ -61,6 +60,10 @@ function showTracking(habits) {
 
     const ahabit = document.createElement('div')
     ahabit.setAttribute('class', 'habitContainer');
+
+
+    const hab_div = document.createElement('div')
+    hab_div.setAttribute('class', 'hab_section');
     
     const habitName = document.createElement('h3')
     habitName.setAttribute('class', 'hab_title');
@@ -76,7 +79,7 @@ function showTracking(habits) {
     updateButton.setAttribute('class', 'btn_update');
     updateButton.setAttribute('type', 'submit')
     updateButton.setAttribute('value', 'update') 
-    updateButton.addEventListener('submit', function(){
+    updateButton.addEventListener('click', function(){
         habitUpdate(habit.habit_id)
     }) 
     
@@ -90,16 +93,25 @@ function showTracking(habits) {
     showChartButton.setAttribute('class', 'btn_chart');
     showChartButton.setAttribute('type', 'submit')
     showChartButton.setAttribute('value', 'Show tracking')
-    /* showChartButton.addEventListener('click', openChartModal); */
+    showChartButton.addEventListener('click', function() {
+        openChartModal(habit.habit_id, habit.color )
+    });
 //modal here that opens to chart
-    
+    const chart = document.createElement('canvas')
+    chart.id = `tracking${habit.habit_id}`;
+    chart.style.width = "100%";
+
+
     ahabit.appendChild(habitName)
     ahabit.appendChild(habitDesc)
     ahabit.appendChild(habitFrequency)
-    ahabit.appendChild(updateButton)  
     ahabit.appendChild(currentCount)
-    ahabit.appendChild(showChartButton) 
+    ahabit.appendChild(hab_div)
+    hab_div.append(updateButton)
+    hab_div.append(showChartButton)
+    ahabit.appendChild(chart)
 
+    
     
     main.appendChild(ahabit)
     console.log('habitlisted')
@@ -107,26 +119,55 @@ function showTracking(habits) {
     })
 }
 
-/* function openChartModal() {
+function openChartModal(habit_id, habit_colour) {
     //create modal
-    
-    const habitChart = new Chart(`${habit.name}`, {
-        type: "bar",
-        data: {
-            labels: [habit.date, habit.date-1, habit.date-2, habit.date-3, habit.date-4, habit.date-5, habit.date-6]
-            datasets: [{
-            backgroundColor: habit.colour,
-            data: [habit.date.count, habit.date-1.] //count per day];
-            }]
-        },
-        options: {...}
-        }); 
+        
+    fetch(`http://localhost:${port}/habits/getcount/${habit_id}`) //change endpoint
+    .then(resp => resp.json())
+    .then(resp => useValues(resp))
+
+    let weekData
+
+    function useValues(resp) {
+        
+        const array = resp;
+        length = resp.length;
+        let startInd
+        if (length<7) {
+            startInd = 0
+        } else {
+            startInd =-7;
+        }
+        
+        weekData = (array.slice([startInd]));
+        console.log(weekData)    
+
+        xAxes = weekData.map(day => day.date_trunc)
+        console.log(xAxes)
+        yValues = weekData.map(day => day.count)
+        console.log(yValues)
+
+        let trackingBar = new Chart(`tracking${habit_id}`, {
+            type: "bar",
+            data: {
+                labels: xAxes,
+                datasets: [{
+                backgroundColor: habit_colour,
+                data: yValues
+                }]
+            },
+            options: {    legend: {display: false},
+            title: {
+            display: true,
+            text: "Progress over the last week"}
+        }}); 
     }
+}
 
     //modal.appendchild chart
     //create closebutton
     //modal appendchild(closebutton)
- */
+ 
 
 
 function closeChartModal() {
@@ -135,13 +176,15 @@ function closeChartModal() {
 
 
 function habitUpdate(habit_id){
+    console.log(habit_id)
     
-    fetch(`http://localhost:${port}/${username}/`, {
-      method: 'PUT',
+    fetch(`http://localhost:${port}/habits/count/${habit_id}`, {
+      method: 'POST',
       body: JSON.stringify({habit_id: habit_id}),
       headers: { 'Content-Type': 'application/json' },
     })
-    location.reload();
+    /* location.reload(); */
+    console.log('++')
 };
 
 

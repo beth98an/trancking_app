@@ -50,6 +50,8 @@ async function destroy(req, res) {
 
 async function count(req, res) {
     try {
+        console.log(req.params)
+        console.log(req.params.id)
         const completed = await Habit.count(req.params.id)
 
         res.status(201).json(completed)
