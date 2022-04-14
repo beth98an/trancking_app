@@ -93,9 +93,13 @@ function showTracking(habits) {
     showChartButton.setAttribute('class', 'btn_chart');
     showChartButton.setAttribute('type', 'submit')
     showChartButton.setAttribute('value', 'Show tracking')
-    /* showChartButton.addEventListener('click', openChartModal); */
+    showChartButton.addEventListener('click', function() {
+        openChartModal(habit.habit_id, habit.color )
+    });
 //modal here that opens to chart
-    
+    const chart = document.createElement('canvas')
+    chart.id = `tracking${habit.habit_id}`;
+    chart.style.width = "100%";
 
 
     ahabit.appendChild(habitName)
@@ -105,6 +109,7 @@ function showTracking(habits) {
     ahabit.appendChild(hab_div)
     hab_div.append(updateButton)
     hab_div.append(showChartButton)
+    ahabit.appendChild(chart)
 
     
     
@@ -114,26 +119,55 @@ function showTracking(habits) {
     })
 }
 
-/* function openChartModal() {
+function openChartModal(habit_id, habit_colour) {
     //create modal
-    
-    const habitChart = new Chart(`${habit.name}`, {
-        type: "bar",
-        data: {
-            labels: [habit.date, habit.date-1, habit.date-2, habit.date-3, habit.date-4, habit.date-5, habit.date-6]
-            datasets: [{
-            backgroundColor: habit.colour,
-            data: [habit.date.count, habit.date-1.] //count per day];
-            }]
-        },
-        options: {...}
-        }); 
+        
+    fetch(`http://localhost:${port}/habits/getcount/${habit_id}`) //change endpoint
+    .then(resp => resp.json())
+    .then(resp => useValues(resp))
+
+    let weekData
+
+    function useValues(resp) {
+        
+        const array = resp;
+        length = resp.length;
+        let startInd
+        if (length<7) {
+            startInd = 0
+        } else {
+            startInd =-7;
+        }
+        
+        weekData = (array.slice([startInd]));
+        console.log(weekData)    
+
+        xAxes = weekData.map(day => day.date_trunc)
+        console.log(xAxes)
+        yValues = weekData.map(day => day.count)
+        console.log(yValues)
+
+        let trackingBar = new Chart(`tracking${habit_id}`, {
+            type: "bar",
+            data: {
+                labels: xAxes,
+                datasets: [{
+                backgroundColor: habit_colour,
+                data: yValues
+                }]
+            },
+            options: {    legend: {display: false},
+            title: {
+            display: true,
+            text: "Progress over the last week"}
+        }}); 
     }
+}
 
     //modal.appendchild chart
     //create closebutton
     //modal appendchild(closebutton)
- */
+ 
 
 
 function closeChartModal() {
