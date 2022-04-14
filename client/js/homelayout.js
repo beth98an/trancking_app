@@ -60,6 +60,10 @@ function showTracking(habits) {
 
     const ahabit = document.createElement('div')
     ahabit.setAttribute('class', 'habitContainer');
+
+
+    const hab_div = document.createElement('div')
+    hab_div.setAttribute('class', 'hab_section');
     
     const habitName = document.createElement('h3')
     habitName.setAttribute('class', 'hab_title');
@@ -92,13 +96,17 @@ function showTracking(habits) {
     /* showChartButton.addEventListener('click', openChartModal); */
 //modal here that opens to chart
     
+
+
     ahabit.appendChild(habitName)
     ahabit.appendChild(habitDesc)
     ahabit.appendChild(habitFrequency)
-    ahabit.appendChild(updateButton)  
     ahabit.appendChild(currentCount)
-    ahabit.appendChild(showChartButton) 
+    ahabit.appendChild(hab_div)
+    hab_div.append(updateButton)
+    hab_div.append(showChartButton)
 
+    
     
     main.appendChild(ahabit)
     console.log('habitlisted')
