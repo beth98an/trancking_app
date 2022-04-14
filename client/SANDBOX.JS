@@ -1,0 +1,7 @@
+ahabit.appendChild(habitName)
+    ahabit.appendChild(habitDesc)
+    ahabit.appendChild(habitFrequency)
+    ahabit.appendChild(hab_div)
+    ahabit.appendChild(updateButton) 
+    ahabit.appendChild(currentCount)
+    ahabit.appendChild(showChartButton)
